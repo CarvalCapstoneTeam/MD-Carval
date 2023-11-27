@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="6dp"
+    app:cardCornerRadius="12dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="6dp"
+        android:background="@drawable/corner_radius">
+
+        <TextView
+            android:id="@+id/tv_Title"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Judul_Berita"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_Writer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Writer"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:id="@+id/tv_Time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/tv_Writer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Waktu"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="12dp"
+            android:textSize="16dp"/>
+
+        <ImageView
+            android:id="@+id/iv_User"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/ic_launcher"/>
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_Username"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Username"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:textSize="20dp"/>-->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
