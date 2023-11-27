@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.dicoding.carvalappandroid.databinding.FragmentAboutBinding
 import com.dicoding.carvalappandroid.databinding.FragmentArticleBinding
 
 class AboutFragment : Fragment() {
 
-    private var _binding: FragmentArticleBinding? = null
+    private var _binding: FragmentAboutBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,13 +26,13 @@ class AboutFragment : Fragment() {
         val aboutViewModel =
             ViewModelProvider(this).get(AboutViewModel::class.java)
 
-        _binding = FragmentArticleBinding.inflate(inflater, container, false)
+        _binding = FragmentAboutBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        aboutViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+//        val textView: TextView = binding.textDashboard
+//        aboutViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
         return root
     }
 

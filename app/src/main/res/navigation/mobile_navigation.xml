@@ -12,16 +12,17 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.dicoding.carvalappandroid.ui.article.ArticleFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_article" />
+        android:id="@+id/navigation_form"
+        android:name="com.dicoding.carvalappandroid.ui.form.FormFragment"
+        android:label="@string/article_form"
+        tools:layout="@layout/fragment_form" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.dicoding.carvalappandroid.ui.form.FormFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_form" />
+        android:id="@+id/navigation_article"
+        android:name="com.dicoding.carvalappandroid.ui.article.ArticleFragment"
+        android:label="@string/title_article"
+        tools:layout="@layout/fragment_article" />
+
 
     <fragment
         android:id="@+id/navigation_about"
