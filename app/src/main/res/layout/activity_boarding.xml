@@ -25,27 +25,31 @@
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-condensed-light"
         android:gravity="center_horizontal"
-        android:text="JUDUL 1"
+        android:text="Check Your Job Validity"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/logoMenu1"
         app:layout_constraintStart_toStartOf="@+id/logoMenu1"
-        app:layout_constraintTop_toBottomOf="@+id/menu1" />
+        app:layout_constraintTop_toBottomOf="@+id/menu1"
+        app:layout_constraintWidth_default="spread"
+        app:layout_constraintHeight_default="wrap"/>
 
     <TextView
         android:id="@+id/descMenu1"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_marginTop="8dp"
         android:fontFamily="sans-serif-condensed-light"
         android:gravity="center_horizontal"
-        android:text="DESC 1"
+        android:text="Using our latest machine learning model, \n get information about whether you are applying for \nthe right job or not"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/titleMenu1"
         app:layout_constraintStart_toStartOf="@+id/titleMenu1"
-        app:layout_constraintTop_toBottomOf="@+id/titleMenu1" />
+        app:layout_constraintTop_toBottomOf="@+id/titleMenu1"
+        app:layout_constraintWidth_default="spread"
+        app:layout_constraintHeight_default="wrap"/>
 
     <ImageView
         android:id="@+id/logoMenu2"
@@ -87,6 +91,46 @@
         app:layout_constraintStart_toStartOf="@+id/titleMenu2"
         app:layout_constraintTop_toBottomOf="@+id/titleMenu2" />
 
+    <ImageView
+        android:id="@+id/logoMenu3"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:src="@drawable/ic_home_black_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3"
+        android:layout_marginBottom="200dp"/>
+
+    <TextView
+        android:id="@+id/titleMenu3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:gravity="center_horizontal"
+        android:text="JUDUL 3"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/logoMenu3"
+        app:layout_constraintStart_toStartOf="@+id/logoMenu3"
+        app:layout_constraintTop_toBottomOf="@+id/menu3" />
+
+    <TextView
+        android:id="@+id/descMenu3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:gravity="center_horizontal"
+        android:text="DESC 2"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/titleMenu3"
+        app:layout_constraintStart_toStartOf="@+id/titleMenu3"
+        app:layout_constraintTop_toBottomOf="@+id/titleMenu3" />
+
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/menu1"
         android:layout_width="30dp"
@@ -108,12 +152,6 @@
         app:srcCompat="@drawable/ic_circle_24"
         app:tint="@color/purple_200" />
 
-<!--    app:layout_constraintBottom_toBottomOf="@+id/menu1"-->
-<!--    app:layout_constraintEnd_toStartOf="@+id/menu3"-->
-<!--    app:layout_constraintHorizontal_bias="0.5"-->
-<!--    app:layout_constraintStart_toEndOf="@+id/menu1"-->
-<!--    app:layout_constraintTop_toTopOf="@+id/menu1"-->
-<!--    app:layout_constraintVertical_bias="0.0"-->
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/menu3"
@@ -129,19 +167,17 @@
         app:srcCompat="@drawable/ic_circle_24"
         app:tint="@color/purple_200" />
 
-<!--    <androidx.constraintlayout.utils.widget.ImageFilterView-->
-<!--        android:id="@+id/menu4"-->
-<!--        android:layout_width="30dp"-->
-<!--        android:layout_height="30dp"-->
-<!--        android:layout_marginEnd="32dp"-->
-<!--        app:altSrc="@drawable/ic_circle_full_24"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/menu3"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/menu3"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/menu3"-->
-<!--        app:layout_constraintVertical_bias="0.0"-->
-<!--        app:srcCompat="@drawable/ic_circle_24"-->
-<!--        app:tint="@color/purple_200" />-->
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Started"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/black"/>
+
 
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
