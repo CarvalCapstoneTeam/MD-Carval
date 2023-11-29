@@ -1,8 +1,13 @@
 package com.dicoding.carvalappandroid.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.dicoding.carvalappandroid.MainActivity
 import com.dicoding.carvalappandroid.databinding.ActivityLoginBinding
+import com.dicoding.carvalappandroid.ui.home.HomeFragment
+import com.dicoding.carvalappandroid.ui.register.RegisterActivity
+import kotlinx.coroutines.MainScope
 
 
 class LoginActivity : AppCompatActivity() {
@@ -14,6 +19,18 @@ private lateinit var binding: ActivityLoginBinding
 
      binding = ActivityLoginBinding.inflate(layoutInflater)
      setContentView(binding.root)
+
+        binding.loginButton.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags =
+                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
+
+        binding.register.setOnClickListener{
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
 
 //        val username = binding.username
 //        val password = binding.password

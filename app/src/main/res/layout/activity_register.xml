@@ -16,7 +16,7 @@
         android:id="@+id/iv_loginWorkers"
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        android:src="@drawable/workerslogin"
+        android:src="@drawable/workersregister"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@id/iv_loginWorkers"
         android:textStyle="bold"
         android:textSize="24sp"
-        android:text="Welcome"
+        android:text="Register"
         android:textColor="@color/black"
         android:gravity="center"/>
     <TextView
@@ -38,19 +38,47 @@
         app:layout_constraintTop_toBottomOf="@id/tv_headerLogin"
         android:layout_marginTop="8dp"
         android:textSize="14sp"
-        android:text="Login with your Account to \n receive full access of this app "
+        android:text="Provide us with the information \n required to create an account "
         android:gravity="center"/>
+
+
     <TextView
-        android:id="@+id/et_Username"
+        android:id="@+id/tv_Email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Username"
+        android:text="Email"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <EditText
+        android:id="@+id/et_Email"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:hint="  Insert Email"
+        android:layout_marginTop="8dp"
+        android:inputType="textEmailAddress"
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_Email"
+        android:background="@drawable/border_radius"
+        />
+
+    <TextView
+        android:id="@+id/tv_Username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"
+        android:text="Username"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/et_Email"/>
 
     <EditText
         android:id="@+id/username"
@@ -62,12 +90,12 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_Username"
+        app:layout_constraintTop_toBottomOf="@id/tv_Username"
         android:background="@drawable/border_radius"
-         />
+        />
 
     <TextView
-        android:id="@+id/et_Password"
+        android:id="@+id/tv_Password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,40 +118,11 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_Password"
+        app:layout_constraintTop_toBottomOf="@+id/tv_Password"
         android:background="@drawable/border_radius"/>
 
     <Button
-        android:id="@+id/login_Button"
-        android:enabled="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="64dp"
-        android:backgroundTint="@drawable/border_radius"
-        android:text="Login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.2" />
-
-    <TextView
-        android:id="@+id/et_Reminder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"
-        android:text="Didn't own an account yet?"
-        android:textSize="12dp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/login_Button"
-        android:gravity="center"/>
-
-    <Button
-        android:id="@+id/register"
+        android:id="@+id/register_Button"
         android:enabled="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -135,8 +134,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_Reminder"
+        app:layout_constraintTop_toBottomOf="@+id/password"
         app:layout_constraintVertical_bias="0.2" />
+
 
     <ProgressBar
         android:id="@+id/loading"
