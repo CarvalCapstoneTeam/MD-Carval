@@ -64,7 +64,7 @@
 
     <TextView
         android:id="@+id/titleMenu2"
-        android:layout_width="0dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-condensed-light"
@@ -75,7 +75,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/logoMenu2"
         app:layout_constraintStart_toStartOf="@+id/logoMenu2"
-        app:layout_constraintTop_toBottomOf="@+id/menu2" />
+        app:layout_constraintTop_toBottomOf="@+id/menu2"
+        android:alpha="0"/>
 
     <TextView
         android:id="@+id/descMenu2"
@@ -89,7 +90,8 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/titleMenu2"
         app:layout_constraintStart_toStartOf="@+id/titleMenu2"
-        app:layout_constraintTop_toBottomOf="@+id/titleMenu2" />
+        app:layout_constraintTop_toBottomOf="@+id/titleMenu2"
+        android:alpha="0"/>
 
     <ImageView
         android:id="@+id/logoMenu3"
@@ -115,7 +117,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/logoMenu3"
         app:layout_constraintStart_toStartOf="@+id/logoMenu3"
-        app:layout_constraintTop_toBottomOf="@+id/menu3" />
+        app:layout_constraintTop_toBottomOf="@+id/menu3"
+        android:alpha="0"/>
 
     <TextView
         android:id="@+id/descMenu3"
@@ -129,7 +132,8 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/titleMenu3"
         app:layout_constraintStart_toStartOf="@+id/titleMenu3"
-        app:layout_constraintTop_toBottomOf="@+id/titleMenu3" />
+        app:layout_constraintTop_toBottomOf="@+id/titleMenu3"
+        android:alpha="0"/>
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/menu1"

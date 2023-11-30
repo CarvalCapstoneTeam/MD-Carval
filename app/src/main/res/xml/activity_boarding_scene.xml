@@ -106,8 +106,8 @@
         </Constraint>
         <Constraint
             android:id="@+id/titleMenu1"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_width="200dp"
+            android:layout_height="10dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-condensed-light"
             android:gravity="center_horizontal"
@@ -119,7 +119,56 @@
             motion:layout_constraintStart_toStartOf="@+id/logoMenu1"
             motion:layout_constraintTop_toBottomOf="@+id/menu1"
             motion:layout_constraintWidth_default="spread"
-            motion:layout_constraintHeight_default="wrap"/>
+            motion:layout_constraintHeight_default="wrap"
+            android:alpha="0"/>
+        <Constraint
+            android:id="@+id/descMenu1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:gravity="center_horizontal"
+            android:text="Using our latest machine learning model, \n get information about whether you are applying for \nthe right job or not"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            motion:layout_constraintEnd_toEndOf="@+id/titleMenu1"
+            motion:layout_constraintStart_toStartOf="@+id/titleMenu1"
+            motion:layout_constraintTop_toBottomOf="@+id/titleMenu1"
+            motion:layout_constraintWidth_default="spread"
+            motion:layout_constraintHeight_default="wrap"
+            android:alpha="0"/>
+
+        <Constraint
+            android:id="@+id/titleMenu2"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:gravity="center_horizontal"
+            android:text="JUDUL 2"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            motion:layout_constraintEnd_toEndOf="@+id/logoMenu2"
+            motion:layout_constraintStart_toStartOf="@+id/logoMenu2"
+            motion:layout_constraintTop_toBottomOf="@+id/menu2"
+            android:alpha="1"/>
+
+        <Constraint
+            android:id="@+id/descMenu2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:gravity="center_horizontal"
+            android:text="Using our latest machine learning model, \n get information about whether you are applying for \nthe right job or not"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            motion:layout_constraintEnd_toEndOf="@+id/titleMenu2"
+            motion:layout_constraintStart_toStartOf="@+id/titleMenu2"
+            motion:layout_constraintTop_toBottomOf="@+id/titleMenu2"
+            android:alpha="1"/>
+
         <Constraint
             android:id="@+id/menu2"
             motion:layout_constraintEnd_toStartOf="@+id/menu3"
@@ -163,9 +212,72 @@
             android:layout_width="0dp"
             android:layout_height="300dp"
             android:layout_marginBottom="200dp"
+            motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintVertical_bias="0.3"
             motion:layout_constraintEnd_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/titleMenu2"
+            android:layout_width="200dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:gravity="center_horizontal"
+            android:text="JUDUL 2"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            motion:layout_constraintEnd_toEndOf="@+id/logoMenu2"
+            motion:layout_constraintStart_toStartOf="@+id/logoMenu2"
+            motion:layout_constraintTop_toBottomOf="@+id/menu2"
+            android:alpha="0"/>
+
+        <Constraint
+            android:id="@+id/descMenu2"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:gravity="center_horizontal"
+            android:text="Using our latest machine learning model, \n get information about whether you are applying for \nthe right job or not"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            motion:layout_constraintEnd_toEndOf="@+id/titleMenu2"
+            motion:layout_constraintStart_toStartOf="@+id/titleMenu2"
+            motion:layout_constraintTop_toBottomOf="@+id/titleMenu2"
+            android:alpha="0"/>
+
+        <Constraint
+            android:id="@+id/titleMenu3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:gravity="center_horizontal"
+            android:text="JUDUL 3"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            motion:layout_constraintEnd_toEndOf="@+id/logoMenu3"
+            motion:layout_constraintStart_toStartOf="@+id/logoMenu3"
+            motion:layout_constraintTop_toBottomOf="@+id/menu3"
+            android:alpha="1"/>
+
+        <Constraint
+            android:id="@+id/descMenu3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:gravity="center_horizontal"
+            android:text="DESC 2"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            motion:layout_constraintEnd_toEndOf="@+id/titleMenu3"
+            motion:layout_constraintStart_toStartOf="@+id/titleMenu3"
+            motion:layout_constraintTop_toBottomOf="@+id/titleMenu3"
+            android:alpha="1"/>
+
         <Constraint
             android:id="@+id/logoMenu3"
             android:layout_width="0dp"
