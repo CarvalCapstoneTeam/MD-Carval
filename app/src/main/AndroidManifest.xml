@@ -13,6 +13,9 @@
         android:theme="@style/Theme.CarValAppAndroid"
         tools:targetApi="31">
         <activity
+            android:name=".ui.detail.DetailArticleActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.register.RegisterActivity"
             android:exported="false" />
         <activity
@@ -35,7 +38,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
     </application>
 
 </manifest>
