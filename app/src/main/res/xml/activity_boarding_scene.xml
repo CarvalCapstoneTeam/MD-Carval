@@ -106,7 +106,7 @@
         </Constraint>
         <Constraint
             android:id="@+id/titleMenu1"
-            android:layout_width="200dp"
+            android:layout_width="300dp"
             android:layout_height="10dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-condensed-light"
@@ -140,7 +140,7 @@
 
         <Constraint
             android:id="@+id/titleMenu2"
-            android:layout_width="200dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-condensed-light"
@@ -218,7 +218,7 @@
             motion:layout_constraintEnd_toStartOf="parent" />
         <Constraint
             android:id="@+id/titleMenu2"
-            android:layout_width="200dp"
+            android:layout_width="300dp"
             android:layout_height="10dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-condensed-light"
