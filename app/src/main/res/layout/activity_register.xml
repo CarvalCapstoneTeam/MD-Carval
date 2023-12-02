@@ -130,15 +130,16 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_Password"
         android:background="@drawable/border_radius"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/register_Button"
         android:enabled="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_gravity="start"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="64dp"
-        android:background="@drawable/border_radius"
+        android:backgroundTint="#164863"
+        app:cornerRadius="12dp"
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
