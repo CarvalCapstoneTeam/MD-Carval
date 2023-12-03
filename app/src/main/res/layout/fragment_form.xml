@@ -300,21 +300,41 @@
             android:textSize="14sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/et_Telecommuting"
+        <RadioGroup
+            android:id="@+id/yesNoRadioGroup"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:selectAllOnFocus="true"
-            android:textSize="17sp"
-            android:paddingStart="17dp"
-            android:paddingEnd="17dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_Telecommuting"
-            android:background="@drawable/border_radius"
-            />
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/yesRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yes" />
+
+            <RadioButton
+                android:id="@+id/noRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No" />
+        </RadioGroup>
+
+<!--        <EditText-->
+<!--            android:id="@+id/et_Telecommuting"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:selectAllOnFocus="true"-->
+<!--            android:textSize="17sp"-->
+<!--            android:paddingStart="17dp"-->
+<!--            android:paddingEnd="17dp"-->
+<!--            android:layout_marginHorizontal="24dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_Telecommuting"-->
+<!--            android:background="@drawable/border_radius"-->
+<!--            />-->
 
         <Button
             android:layout_width="match_parent"
