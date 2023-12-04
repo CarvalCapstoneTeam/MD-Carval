@@ -3,23 +3,23 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/home2"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_form"
-        android:icon="@drawable/form"
+        android:icon="@drawable/form2"
         android:title="@string/article_form" />
 
     <item
         android:id="@+id/navigation_article"
-        android:icon="@drawable/newspaper"
+        android:icon="@drawable/news2"
         android:title="@string/title_article" />
 
 
     <item
         android:id="@+id/navigation_about"
-        android:icon="@drawable/person"
+        android:icon="@drawable/person2"
         android:title="@string/title_about" />
 
 </menu>
