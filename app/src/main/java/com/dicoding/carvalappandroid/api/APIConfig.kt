@@ -7,10 +7,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class APIConfig {
     companion object{
-        fun getAPIService():APIService {
+        fun getAPIService(token : String):APIService {
             val authInterceptor = Interceptor{chain ->
                 val req = chain.request()
                 val requestHeaders = req.newBuilder()
+                    .addHeader("Authorization", token)
                     .build()
                 chain.proceed(requestHeaders)
             }
