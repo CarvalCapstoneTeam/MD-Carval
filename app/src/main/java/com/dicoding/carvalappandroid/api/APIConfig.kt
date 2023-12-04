@@ -19,7 +19,7 @@ class APIConfig {
                 .addInterceptor(authInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("")
+                .baseUrl("Link URL")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
