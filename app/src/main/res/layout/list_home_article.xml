@@ -53,8 +53,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:layout_height="150dp"
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="fitXY"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

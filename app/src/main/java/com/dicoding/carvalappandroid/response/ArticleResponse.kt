@@ -14,7 +14,7 @@ data class ArticleResponseItem(
 	val description: String? = null,
 	val createdAt: String? = null,
 	@PrimaryKey
-	val id: Int ,
+	val id: Int,
 	val title: String? = null,
 	val slug: String? = null,
 	val content: String? = null

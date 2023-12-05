@@ -20,6 +20,7 @@ class AboutFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    @SuppressLint("RestrictedApi")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,6 +31,8 @@ class AboutFragment : Fragment() {
         _binding = FragmentAboutBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+
 //        val textView: TextView = binding.textDashboard
 //        aboutViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
@@ -37,25 +40,25 @@ class AboutFragment : Fragment() {
         return root
     }
 
-    @SuppressLint("RestrictedApi")
-    override fun onResume() {
-        super.onResume()
-        val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
-        actionBar?.let {
-            it.setShowHideAnimationEnabled(false)
-            it.hide()
-        }
-    }
-
-    @SuppressLint("RestrictedApi")
-    override fun onPause() {
-        super.onPause()
-        val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
-        actionBar?.let {
-            it.setShowHideAnimationEnabled(false)
-            it.show()
-        }
-    }
+//    @SuppressLint("RestrictedApi")
+//    override fun onResume() {
+//        super.onResume()
+//        val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
+//        actionBar?.let {
+//            it.setShowHideAnimationEnabled(false)
+//            it.hide()
+//        }
+//    }
+//
+//    @SuppressLint("RestrictedApi")
+//    override fun onPause() {
+//        super.onPause()
+//        val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
+//        actionBar?.let {
+//            it.setShowHideAnimationEnabled(false)
+//            it.show()
+//        }
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

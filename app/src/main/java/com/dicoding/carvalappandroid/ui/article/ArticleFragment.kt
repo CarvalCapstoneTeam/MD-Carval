@@ -30,6 +30,8 @@ class ArticleFragment : Fragment() {
         _binding = FragmentArticleBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+
 //        val textView: TextView = binding.textDashboard
 //        articleViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
@@ -37,25 +39,6 @@ class ArticleFragment : Fragment() {
         return root
     }
 
-    @SuppressLint("RestrictedApi")
-    override fun onResume() {
-        super.onResume()
-        val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
-        actionBar?.let {
-            it.setShowHideAnimationEnabled(false)
-            it.hide()
-        }
-    }
-
-    @SuppressLint("RestrictedApi")
-    override fun onPause() {
-        super.onPause()
-        val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
-        actionBar?.let {
-            it.setShowHideAnimationEnabled(false)
-            it.show()
-        }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

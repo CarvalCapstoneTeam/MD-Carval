@@ -35,27 +35,8 @@ class FormFragment : Fragment() {
 //        formViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
 //        }
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         return root
-    }
-
-    @SuppressLint("RestrictedApi")
-    override fun onResume() {
-        super.onResume()
-        val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
-        actionBar?.let {
-            it.setShowHideAnimationEnabled(false)
-            it.hide()
-        }
-    }
-
-    @SuppressLint("RestrictedApi")
-    override fun onPause() {
-        super.onPause()
-        val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
-        actionBar?.let {
-            it.setShowHideAnimationEnabled(false)
-            it.show()
-        }
     }
 
     override fun onDestroyView() {

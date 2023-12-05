@@ -24,7 +24,7 @@ interface APIService {
     @POST("register")
     suspend fun register(
         @Field("email") email : String,
-        @Field("username") username : String,
+        @Field("name") name : String,
         @Field("password") password : String
     ) : RegisterResponse
 

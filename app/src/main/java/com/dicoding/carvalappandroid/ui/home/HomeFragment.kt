@@ -1,14 +1,10 @@
 package com.dicoding.carvalappandroid.ui.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.carvalappandroid.R
@@ -32,29 +28,15 @@ class HomeFragment : Fragment() {
         val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
 //        val textView: TextView = binding.textHome
 //        homeViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
 //        }
-        return root
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.fragment_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId){
-            R.id.action_settings ->{
-                val intent = Intent(requireContext(), SettingsActivity::class.java)
-                startActivity(intent)
-            }
-        }
-        return super.onOptionsItemSelected(item)
+        return binding.root
     }
 
     override fun onDestroyView() {
