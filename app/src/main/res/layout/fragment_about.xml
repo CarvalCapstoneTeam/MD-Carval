@@ -67,14 +67,14 @@ tools:context=".ui.article.ArticleFragment">
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="24dp"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_Edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical|start"
         android:text="Edit Profile"
         android:background="@drawable/border_button"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/black"
         android:textColor="@color/black"
         android:padding="12dp"
         android:drawableRight="@drawable/custom_size_endbutton"

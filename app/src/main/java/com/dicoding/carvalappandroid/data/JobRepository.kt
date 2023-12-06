@@ -1,5 +1,8 @@
 package com.dicoding.carvalappandroid.data
 
+import android.content.ContentValues.TAG
+import android.nfc.Tag
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.paging.ExperimentalPagingApi
@@ -10,6 +13,7 @@ import androidx.paging.liveData
 import com.dicoding.carvalappandroid.api.APIService
 import com.dicoding.carvalappandroid.remotekeys.JobRemoteMediator
 import com.dicoding.carvalappandroid.response.ArticleResponseItem
+import com.dicoding.carvalappandroid.response.DetailResponse
 import com.dicoding.carvalappandroid.response.LoginResponse
 import com.dicoding.carvalappandroid.response.RegisterResponse
 import com.dicoding.carvalappandroid.setting.TokenPreference
@@ -64,6 +68,25 @@ class JobRepository constructor(
                 jobDatabase.jobDAO().getAllArticle()
             }
         ).liveData
+    }
+
+    fun getDetailArticle(id : String) : LiveData<Result<DetailResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            Log.d(TAG, "API Request : id = $id")
+            val response = apiService.getDetailArticle(id)
+
+            if (response != null){
+                Log.d(TAG, "Resp : $response")
+                emit(Result.Success(response))
+            }else{
+                val errorMessage = "Empty Response"
+                Log.e(TAG, errorMessage)
+                emit(Result.Error(errorMessage))
+            }
+        }catch (e:Exception){
+            emit(Result.Error(e.message.toString()))
+        }
     }
 
     suspend fun saveSession(userModel: UserModel){
