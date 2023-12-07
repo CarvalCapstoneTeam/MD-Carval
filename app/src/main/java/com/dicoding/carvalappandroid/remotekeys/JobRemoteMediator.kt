@@ -66,7 +66,7 @@ class JobRemoteMediator(
             }
         }
         return try {
-            val responseData = apiService.getArticlesUnlimited(page, state.config.pageSize).articleResponse
+            val responseData = apiService.getArticlesUnlimited(page, state.config.pageSize).listArticle
             val endOfPaginationReached = responseData!!.isEmpty()
 
             database.withTransaction {

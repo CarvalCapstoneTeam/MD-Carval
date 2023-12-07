@@ -1,5 +1,6 @@
 package com.dicoding.carvalappandroid.api
 
+import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -15,11 +16,12 @@ class APIConfig {
                     .build()
                 chain.proceed(requestHeaders)
             }
+//            val gson = GsonBuilder().setLenient().create()
             val client = OkHttpClient.Builder()
                 .addInterceptor(authInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("Link URL")
+                .baseUrl("https://carval.hmifunsri.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

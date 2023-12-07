@@ -37,7 +37,7 @@ class JobRepository constructor(
         } catch (e : HttpException){
             val errorBody = e.response()?.errorBody()?.string()
             val errorResponse = Gson().fromJson(errorBody, LoginResponse::class.java)
-            emit(Result.Error(errorResponse.message))
+            emit(errorResponse.message?.let { Result.Error(it) })
         }
     }
 
@@ -45,7 +45,7 @@ class JobRepository constructor(
         emit(Result.Loading)
         try {
             if (password == password2){
-                val success = apiService.register(email, name, password)
+                val success = apiService.register(name, email, password, password2)
                 emit(Result.Success(success))
             }else{
                 //setError

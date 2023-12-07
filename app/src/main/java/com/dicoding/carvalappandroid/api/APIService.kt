@@ -16,16 +16,17 @@ interface APIService {
     @FormUrlEncoded
     @POST("login")
     suspend fun login(
-        @Field("username") username : String,
+        @Field("email") email : String,
         @Field("password") password : String
     ) : LoginResponse
 
     @FormUrlEncoded
     @POST("register")
     suspend fun register(
-        @Field("email") email : String,
         @Field("name") name : String,
-        @Field("password") password : String
+        @Field("email") email : String,
+        @Field("password") password : String,
+        @Field("password_confirmation") passwordConfirm : String
     ) : RegisterResponse
 
     @GET("news")
