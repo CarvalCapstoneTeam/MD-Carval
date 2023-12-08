@@ -15,8 +15,9 @@
         android:theme="@style/Theme.CarValAppAndroid"
         tools:targetApi="31">
         <activity
-            android:name=".ui.splaschscreen.SplashScreenActivity"
-            android:exported="false" />
+            android:name=".ui.splashscreen.SplashScreenActivity"
+            android:exported="false">
+        </activity>
         <activity
             android:name=".ui.result.ResultActivity"
             android:exported="false"
