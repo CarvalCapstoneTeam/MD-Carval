@@ -43,11 +43,12 @@ class LoginActivity : AppCompatActivity() {
                         is Result.Success ->{
                             showLoading(false)
                             val token = result.data.loginResult?.token
+                            val name = result.data.loginResult?.name
                             Log.d("Log", "Message : ${result.data.message}")
                             Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
                             if (token != null){
                                 Log.d("TokenLog", "Token: $token")
-                                viewModel.saveSession(UserModel(email, token))
+                                viewModel.saveSession(UserModel(email, name.toString(),token))
                             }
                             AlertDialog.Builder(this).apply {
                                 setTitle("Mau Masuk?")

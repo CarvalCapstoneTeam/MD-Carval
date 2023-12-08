@@ -9,14 +9,20 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.carvalappandroid.databinding.FragmentAboutBinding
 import com.dicoding.carvalappandroid.databinding.FragmentArticleBinding
 import com.dicoding.carvalappandroid.setting.SettingsActivity
+import com.dicoding.carvalappandroid.ui.onboarding.BoardingActivity
+import com.dicoding.carvalappandroid.utils.ViewModelFactory
 
 class AboutFragment : Fragment() {
 
     private var _binding: FragmentAboutBinding? = null
+    private val viewModel by viewModels<AboutViewModel> {
+        ViewModelFactory.getInstance(requireActivity(), false)
+    }
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -28,8 +34,6 @@ class AboutFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val aboutViewModel =
-            ViewModelProvider(this).get(AboutViewModel::class.java)
         _binding = FragmentAboutBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -38,6 +42,12 @@ class AboutFragment : Fragment() {
         binding.btnSetting.setOnClickListener{
             val intent = Intent(requireActivity(), SettingsActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.btnLogout.setOnClickListener{
+            val intent = Intent(requireActivity(), BoardingActivity::class.java)
+            startActivity(intent)
+            viewModel.logout()
         }
 
 //        val textView: TextView = binding.textDashboard
