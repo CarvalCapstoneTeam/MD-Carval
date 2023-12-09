@@ -58,7 +58,7 @@ class JobRepository constructor(
     }
 
     @OptIn(ExperimentalPagingApi::class)
-    fun getArticle() : LiveData<PagingData<ArticleResponseItem>>{
+    fun getArticleUnlimited() : LiveData<PagingData<ArticleResponseItem>>{
         return Pager(
             config = PagingConfig(
                 pageSize = 5
@@ -68,6 +68,17 @@ class JobRepository constructor(
                 jobDatabase.jobDAO().getAllArticle()
             }
         ).liveData
+    }
+
+
+    fun getArticle() : LiveData<Result<List<ArticleResponseItem>>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getArticles()
+            emit(Result.Success(response.listArticle))
+        }catch (e:Exception){
+            emit(Result.Error(e.message.toString()))
+        }
     }
 
     fun getDetailArticle(id : String) : LiveData<Result<DetailResponse>> = liveData {

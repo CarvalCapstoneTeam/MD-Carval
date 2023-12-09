@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.dicoding.carvalappandroid.MainViewModel
 import com.dicoding.carvalappandroid.data.JobRepository
 import com.dicoding.carvalappandroid.ui.about.AboutViewModel
+import com.dicoding.carvalappandroid.ui.article.ArticleViewModel
 import com.dicoding.carvalappandroid.ui.home.HomeViewModel
 import com.dicoding.carvalappandroid.ui.login.LoginViewModel
 import com.dicoding.carvalappandroid.ui.onboarding.BoardingViewModel
@@ -37,6 +38,10 @@ class ViewModelFactory(private val repository: JobRepository): ViewModelProvider
 
             modelClass.isAssignableFrom(AboutViewModel::class.java) -> {
                 AboutViewModel(repository) as T
+            }
+
+            modelClass.isAssignableFrom(ArticleViewModel::class.java) -> {
+                ArticleViewModel(repository) as T
             }
 
             else -> throw IllegalArgumentException("Unknown VM Class : " + modelClass.name)

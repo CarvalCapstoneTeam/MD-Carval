@@ -2,40 +2,68 @@ package com.dicoding.carvalappandroid.ui.article
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.carvalappandroid.databinding.FragmentArticleBinding
+import com.dicoding.carvalappandroid.utils.Result
+import com.dicoding.carvalappandroid.utils.ViewModelFactory
 
 class ArticleFragment : Fragment() {
 
     private var _binding: FragmentArticleBinding? = null
+    private lateinit var adapter : ArticleAdapter
+    private val viewModel by viewModels<ArticleViewModel> {
+        ViewModelFactory.getInstance(requireActivity(), false)
+    }
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        adapter = ArticleAdapter()
+        binding.rvArticle.adapter = adapter
+        viewModel.getArticles().observe(viewLifecycleOwner) {
+            when(it){
+                is Result.Loading ->{
+                    Log.d("Loading", "Currently Loading" )
+                }
+
+                is Result.Success -> {
+                    adapter.submitList(it.data)
+                }
+
+                is  Result.Error -> {
+                    Log.d("ErrorArticle", "Error : ${it.error}")
+                }
+            }
+        }
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val articleViewModel =
-            ViewModelProvider(this).get(ArticleViewModel::class.java)
 
         _binding = FragmentArticleBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        binding.rvArticle.layoutManager = LinearLayoutManager(requireActivity())
 
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
-//        val textView: TextView = binding.textDashboard
-//        articleViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
         return root
     }
 

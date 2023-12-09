@@ -29,10 +29,10 @@ interface APIService {
         @Field("password_confirmation") passwordConfirm : String
     ) : RegisterResponse
 
-    @GET("news")
+    @GET("articles")
     suspend fun getArticles() : ArticleResponse
 
-    @GET("news")
+    @GET("articles")
     suspend fun getArticlesUnlimited(
         @Query("page") page : Int = 1,
         @Query("size") size : Int = 20
