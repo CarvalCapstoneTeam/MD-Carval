@@ -38,8 +38,8 @@ interface APIService {
         @Query("size") size : Int = 20
     ) : ArticleResponse
 
-    @GET("news/{id}/show")
-    suspend fun getDetailArticle(@Path("id") id : String) : DetailResponse
+    @GET("articles/{slug}/show")
+    suspend fun getDetailArticle(@Path("slug") slug : String) : DetailResponse
 
     @GET("result/{num}")
     suspend fun getResultById(@Path("num") num : Int) : ResultResponse
