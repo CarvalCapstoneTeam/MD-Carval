@@ -15,6 +15,7 @@ import com.dicoding.carvalappandroid.remotekeys.JobRemoteMediator
 import com.dicoding.carvalappandroid.response.ArticleResponseItem
 import com.dicoding.carvalappandroid.response.DetailResponse
 import com.dicoding.carvalappandroid.response.LoginResponse
+import com.dicoding.carvalappandroid.response.OTPResponse
 import com.dicoding.carvalappandroid.response.RegisterResponse
 import com.dicoding.carvalappandroid.setting.TokenPreference
 import com.dicoding.carvalappandroid.utils.Result
@@ -54,6 +55,16 @@ class JobRepository constructor(
             val errorBody = e.response()?.errorBody()?.string()
             val errorResponse = Gson().fromJson(errorBody, RegisterResponse::class.java)
             emit(Result.Error(errorResponse.message))
+        }
+    }
+
+    fun verifyEmail (email : String) : LiveData<Result<OTPResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.verifyEmail(email)
+            emit(Result.Success(response))
+        }catch (e:Exception){
+            emit(Result.Error(e.message.toString()))
         }
     }
 
@@ -102,6 +113,10 @@ class JobRepository constructor(
 
     suspend fun saveSession(userModel: UserModel){
         tokenPref.saveSession(userModel)
+    }
+
+    suspend fun saveVerified(userModel: UserModel){
+        tokenPref.saveVerified(userModel)
     }
 
     fun getSession(): Flow<UserModel> {

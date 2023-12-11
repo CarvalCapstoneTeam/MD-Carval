@@ -11,6 +11,7 @@ import com.dicoding.carvalappandroid.ui.detail.DetailViewModel
 import com.dicoding.carvalappandroid.ui.home.HomeViewModel
 import com.dicoding.carvalappandroid.ui.login.LoginViewModel
 import com.dicoding.carvalappandroid.ui.onboarding.BoardingViewModel
+import com.dicoding.carvalappandroid.ui.otp.OTPViewModel
 import com.dicoding.carvalappandroid.ui.register.RegisterViewModel
 
 class ViewModelFactory(private val repository: JobRepository): ViewModelProvider.NewInstanceFactory() {
@@ -47,6 +48,10 @@ class ViewModelFactory(private val repository: JobRepository): ViewModelProvider
 
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 DetailViewModel(repository) as T
+            }
+
+            modelClass.isAssignableFrom(OTPViewModel::class.java) -> {
+                OTPViewModel(repository) as T
             }
 
             else -> throw IllegalArgumentException("Unknown VM Class : " + modelClass.name)

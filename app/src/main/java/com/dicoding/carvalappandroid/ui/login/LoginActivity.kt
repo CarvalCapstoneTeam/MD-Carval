@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.carvalappandroid.MainActivity
 import com.dicoding.carvalappandroid.databinding.ActivityLoginBinding
 import com.dicoding.carvalappandroid.ui.home.HomeFragment
+import com.dicoding.carvalappandroid.ui.otp.OTPActivity
 import com.dicoding.carvalappandroid.ui.register.RegisterActivity
 import com.dicoding.carvalappandroid.utils.Result
 import com.dicoding.carvalappandroid.utils.UserModel
@@ -50,19 +51,40 @@ class LoginActivity : AppCompatActivity() {
                                 Log.d("TokenLog", "Token: $token")
                                 viewModel.saveSession(UserModel(email, name.toString(),token))
                             }
-                            AlertDialog.Builder(this).apply {
-                                setTitle("Mau Masuk?")
-                                setMessage("Berhasil Login!")
-                                setPositiveButton("Login"){_,_->
-                                    val intent = Intent(context, MainActivity::class.java)
-                                    intent.flags =
-                                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                    startActivity(intent)
+                            if(result.data.loginResult?.emailVerifiedAt == null){
+                                AlertDialog.Builder(this).apply {
+                                    setTitle("Mau Masuk?")
+                                    setMessage("Berhasil Login!")
+                                    setNegativeButton("Just Login"){_,_->
+                                        val intent = Intent(context, MainActivity::class.java)
+                                        intent.flags =
+                                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                        startActivity(intent)
+                                    }
+                                    setPositiveButton("Verify my Account"){_,_->
+                                        val intent = Intent(context, OTPActivity::class.java)
+                                        intent.putExtra("token", result.data.loginResult?.token)
+                                        intent.putExtra("email", result.data.loginResult?.email)
+                                        startActivity(intent)
+                                    }
+                                    create()
+                                    show()
                                 }
-                                create()
-                                show()
                             }
-
+                            else{
+                                AlertDialog.Builder(this).apply {
+                                    setTitle("Mau Masuk?")
+                                    setMessage("Berhasil Login!")
+                                    setPositiveButton("Login"){_,_->
+                                        val intent = Intent(context, MainActivity::class.java)
+                                        intent.flags =
+                                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                        startActivity(intent)
+                                    }
+                                    create()
+                                    show()
+                                }
+                            }
                         }
                         is Result.Error ->{
                             showLoading(false)

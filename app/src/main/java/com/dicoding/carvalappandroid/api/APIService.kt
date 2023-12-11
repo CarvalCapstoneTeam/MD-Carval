@@ -3,6 +3,7 @@ package com.dicoding.carvalappandroid.api
 import com.dicoding.carvalappandroid.response.ArticleResponse
 import com.dicoding.carvalappandroid.response.DetailResponse
 import com.dicoding.carvalappandroid.response.LoginResponse
+import com.dicoding.carvalappandroid.response.OTPResponse
 import com.dicoding.carvalappandroid.response.RegisterResponse
 import com.dicoding.carvalappandroid.response.ResultResponse
 import retrofit2.http.Field
@@ -28,6 +29,12 @@ interface APIService {
         @Field("password") password : String,
         @Field("password_confirmation") passwordConfirm : String
     ) : RegisterResponse
+
+    @FormUrlEncoded
+    @POST("email-verification")
+    suspend fun verifyEmail(
+        @Field("email") email : String,
+    ) : OTPResponse
 
     @GET("articles")
     suspend fun getArticles() : ArticleResponse

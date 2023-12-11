@@ -26,6 +26,12 @@ class TokenPreference private constructor(private val dataStore : DataStore<Pref
         }
     }
 
+    suspend fun saveVerified(user: UserModel){
+        dataStore.edit { preferences ->
+            preferences[IS_VERIFIED_KEY] =  user.isVerified
+        }
+    }
+
     fun getSession(): Flow<UserModel> {
         return dataStore.data.map { preferences ->
             UserModel(
@@ -54,6 +60,7 @@ class TokenPreference private constructor(private val dataStore : DataStore<Pref
         private val TOKEN_KEY = stringPreferencesKey("token")
         private val USERNAME_KEY = stringPreferencesKey("username")
         private val IS_LOGIN_KEY = booleanPreferencesKey("isLogin")
+        private val IS_VERIFIED_KEY = booleanPreferencesKey("isVerified")
 
         fun getInstance(dataStore: DataStore<Preferences>): TokenPreference{
             return INSTANCE?: synchronized(this){
