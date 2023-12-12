@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ArticleResponse(
 	@field:SerializedName("listArticle")
-	val listArticle: List<ArticleResponseItem> = emptyList(),
+	val listArticle: ListArticle? = null,
 
 	@field:SerializedName("error")
 	val error: Boolean? = null,
@@ -15,8 +15,62 @@ data class ArticleResponse(
 	val message: String? = null
 )
 
+data class LinksItem(
+
+	@field:SerializedName("active")
+	val active: Boolean? = null,
+
+	@field:SerializedName("label")
+	val label: String? = null,
+
+	@field:SerializedName("url")
+	val url: Any? = null
+)
+
+data class ListArticle(
+
+	@field:SerializedName("per_page")
+	val perPage: Int? = null,
+
+	@field:SerializedName("data")
+	val data: List<DataItem> = emptyList(),
+
+	@field:SerializedName("last_page")
+	val lastPage: Int? = null,
+
+	@field:SerializedName("next_page_url")
+	val nextPageUrl: Any? = null,
+
+	@field:SerializedName("prev_page_url")
+	val prevPageUrl: Any? = null,
+
+	@field:SerializedName("first_page_url")
+	val firstPageUrl: String? = null,
+
+	@field:SerializedName("path")
+	val path: String? = null,
+
+	@field:SerializedName("total")
+	val total: Int? = null,
+
+	@field:SerializedName("last_page_url")
+	val lastPageUrl: String? = null,
+
+	@field:SerializedName("from")
+	val from: Int? = null,
+
+	@field:SerializedName("links")
+	val links: List<LinksItem?>? = null,
+
+	@field:SerializedName("to")
+	val to: Int? = null,
+
+	@field:SerializedName("current_page")
+	val currentPage: Int? = null
+)
+
 @Entity(tableName = "article")
-data class ArticleResponseItem(
+data class DataItem(
 
 	@field:SerializedName("thumbnail")
 	val thumbnail: String? = null,
@@ -30,7 +84,6 @@ data class ArticleResponseItem(
 	@field:SerializedName("created_at")
 	val createdAt: String? = null,
 
-	@PrimaryKey
 	@field:SerializedName("id")
 	val id: Int,
 
@@ -40,8 +93,9 @@ data class ArticleResponseItem(
 	@field:SerializedName("title")
 	val title: String? = null,
 
+	@PrimaryKey
 	@field:SerializedName("slug")
-	val slug: String? = null,
+	val slug: String,
 
 	@field:SerializedName("content")
 	val content: String? = null,

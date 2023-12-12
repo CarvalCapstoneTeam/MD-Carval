@@ -9,12 +9,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dicoding.carvalappandroid.databinding.ListItemArticleBinding
-import com.dicoding.carvalappandroid.response.ArticleResponseItem
+import com.dicoding.carvalappandroid.response.DataItem
 import com.dicoding.carvalappandroid.ui.detail.DetailArticleActivity
 
-class ArticleAdapter :
-    ListAdapter<ArticleResponseItem, ArticleAdapter.ViewHolder>(DIFF_CALLBACK) {
-//    PagingDataAdapter<ArticleResponseItem, ArticleAdapter.ViewHolder>(DIFF_CALLBACK) {
+class ArticleAdapter : PagingDataAdapter<DataItem, ArticleAdapter.ViewHolder>(DIFF_CALLBACK) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,7 +27,7 @@ class ArticleAdapter :
     }
 
     class ViewHolder(private val binding : ListItemArticleBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ArticleResponseItem){
+        fun bind(item: DataItem){
             binding.tvTitle.text = item.title
             binding.tvTime.text = item.sourceDate
             binding.tvWriter.text = item.source
@@ -45,17 +43,17 @@ class ArticleAdapter :
     }
 
     companion object{
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ArticleResponseItem>() {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataItem>() {
             override fun areItemsTheSame(
-                oldItem: ArticleResponseItem,
-                newItem: ArticleResponseItem
+                oldItem: DataItem,
+                newItem: DataItem
             ): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: ArticleResponseItem,
-                newItem: ArticleResponseItem
+                oldItem: DataItem,
+                newItem: DataItem
             ): Boolean {
                 return oldItem == newItem
             }

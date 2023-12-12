@@ -45,6 +45,8 @@ interface APIService {
         @Query("size") size : Int = 20
     ) : ArticleResponse
 
+//    @Query("keyword") keyword : String?,
+
     @GET("articles/{slug}/show")
     suspend fun getDetailArticle(@Path("slug") slug : String) : DetailResponse
 

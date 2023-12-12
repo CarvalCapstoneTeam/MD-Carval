@@ -20,7 +20,6 @@ class BoardingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_boarding)
         binding = ActivityBoardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

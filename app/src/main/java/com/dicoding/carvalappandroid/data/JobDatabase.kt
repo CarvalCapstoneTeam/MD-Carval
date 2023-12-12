@@ -6,11 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.dicoding.carvalappandroid.remotekeys.RemoteKeys
 import com.dicoding.carvalappandroid.remotekeys.RemoteKeysDAO
-import com.dicoding.carvalappandroid.response.ArticleResponseItem
+import com.dicoding.carvalappandroid.response.DataItem
 
 @Database(
-    entities = [ArticleResponseItem::class, RemoteKeys::class],
-    version = 1,
+    entities = [DataItem::class, RemoteKeys::class],
+    version = 3,
     exportSchema = false
 )
 abstract class JobDatabase : RoomDatabase() {

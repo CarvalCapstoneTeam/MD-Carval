@@ -53,9 +53,9 @@ class LoginActivity : AppCompatActivity() {
                             }
                             if(result.data.loginResult?.emailVerifiedAt == null){
                                 AlertDialog.Builder(this).apply {
-                                    setTitle("Mau Masuk?")
-                                    setMessage("Berhasil Login!")
-                                    setNegativeButton("Just Login"){_,_->
+                                    setTitle("Login Success!!")
+                                    setMessage("Would you like to verify your account?")
+                                    setNegativeButton("Maybe Later"){_,_->
                                         val intent = Intent(context, MainActivity::class.java)
                                         intent.flags =
                                             Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

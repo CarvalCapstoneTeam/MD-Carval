@@ -34,21 +34,7 @@ class ArticleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         adapter = ArticleAdapter()
         binding.rvArticle.adapter = adapter
-        viewModel.getArticles().observe(viewLifecycleOwner) {
-            when(it){
-                is Result.Loading ->{
-                    Log.d("Loading", "Currently Loading" )
-                }
 
-                is Result.Success -> {
-                    adapter.submitList(it.data)
-                }
-
-                is  Result.Error -> {
-                    Log.d("ErrorArticle", "Error : ${it.error}")
-                }
-            }
-        }
     }
 
 
@@ -61,6 +47,13 @@ class ArticleFragment : Fragment() {
         _binding = FragmentArticleBinding.inflate(inflater, container, false)
         val root: View = binding.root
         binding.rvArticle.layoutManager = LinearLayoutManager(requireActivity())
+        val dividerItemDecoration =
+            DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
+        binding.rvArticle.addItemDecoration(dividerItemDecoration)
+
+        viewModel.getArticleUnlimited.observe(viewLifecycleOwner) {
+            adapter.submitData(viewLifecycleOwner.lifecycle, it)
+        }
 
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 

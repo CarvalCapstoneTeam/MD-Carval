@@ -12,7 +12,7 @@ import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.dicoding.carvalappandroid.api.APIService
 import com.dicoding.carvalappandroid.remotekeys.JobRemoteMediator
-import com.dicoding.carvalappandroid.response.ArticleResponseItem
+import com.dicoding.carvalappandroid.response.DataItem
 import com.dicoding.carvalappandroid.response.DetailResponse
 import com.dicoding.carvalappandroid.response.LoginResponse
 import com.dicoding.carvalappandroid.response.OTPResponse
@@ -69,10 +69,10 @@ class JobRepository constructor(
     }
 
     @OptIn(ExperimentalPagingApi::class)
-    fun getArticleUnlimited() : LiveData<PagingData<ArticleResponseItem>>{
+    fun getArticleUnlimited() : LiveData<PagingData<DataItem>>{
         return Pager(
             config = PagingConfig(
-                pageSize = 5
+                pageSize = 10
             ),
             remoteMediator = JobRemoteMediator(jobDatabase, apiService),
             pagingSourceFactory = {
@@ -82,15 +82,15 @@ class JobRepository constructor(
     }
 
 
-    fun getArticle() : LiveData<Result<List<ArticleResponseItem>>> = liveData {
-        emit(Result.Loading)
-        try {
-            val response = apiService.getArticles()
-            emit(Result.Success(response.listArticle))
-        }catch (e:Exception){
-            emit(Result.Error(e.message.toString()))
-        }
-    }
+//    fun getArticle() : LiveData<Result<List<DataItem>>> = liveData {
+//        emit(Result.Loading)
+//        try {
+//            val response = apiService.getArticles()
+//            emit(Result.Success(response.listArticle.data))
+//        }catch (e:Exception){
+//            emit(Result.Error(e.message.toString()))
+//        }
+//    }
 
     fun getDetailArticle(id : String) : LiveData<Result<DetailResponse>> = liveData {
         emit(Result.Loading)

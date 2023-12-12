@@ -16,8 +16,8 @@ import com.dicoding.carvalappandroid.utils.ViewModelFactory
 class OTPActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityOtpactivityBinding
-    private val viewModel by viewModels<OTPViewModel>{
-        ViewModelFactory.getInstance(this,true)
+    private val viewModel by viewModels<OTPViewModel> {
+        ViewModelFactory.getInstance(this, true)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,22 +32,24 @@ class OTPActivity : AppCompatActivity() {
 
         if (email != null) {
             Toast.makeText(this, email, Toast.LENGTH_SHORT).show()
-            viewModel.verification(email).observe(this){result->
-                when (result){
-                    is Result.Loading->{
+            viewModel.verification(email).observe(this) { result ->
+                when (result) {
+                    is Result.Loading -> {
                         Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
                     }
-                    is Result.Error ->{
+
+                    is Result.Error -> {
                         Log.d("Log", "Message : ${result.error}")
                         Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
                     }
-                    is Result.Success->{
+
+                    is Result.Success -> {
                         Log.d("Log", "Message : ${result.data.message}")
                         Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
-        }else{
+        } else {
             Toast.makeText(this, "Gagal mendapatkan email", Toast.LENGTH_SHORT).show()
         }
 
@@ -61,7 +63,7 @@ class OTPActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                if (p0?.length == 1){
+                if (p0?.length == 1) {
                     binding.editTextDigit2.requestFocus()
                 }
             }
@@ -77,7 +79,7 @@ class OTPActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                if (p0?.length == 1){
+                if (p0?.length == 1) {
                     binding.editTextDigit3.requestFocus()
                 }
             }
@@ -93,7 +95,7 @@ class OTPActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                if (p0?.length == 1){
+                if (p0?.length == 1) {
                     binding.editTextDigit4.requestFocus()
                 }
             }
