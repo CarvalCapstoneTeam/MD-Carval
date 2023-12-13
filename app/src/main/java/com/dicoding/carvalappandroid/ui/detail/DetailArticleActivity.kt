@@ -22,8 +22,12 @@ class DetailArticleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailArticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.hide()
         val slug = intent.getStringExtra("news_slug")
+
+        binding.ibBack.setOnClickListener{
+            onBackPressedDispatcher.onBackPressed()
+        }
 
 
         viewModel.getDetailStory(slug.toString()).observe(this){result->
@@ -52,6 +56,7 @@ class DetailArticleActivity : AppCompatActivity() {
             .into(binding.ivThumbnail)
         binding.tvTitleDetail.text = data.article?.title
         binding.tvPenulis.text = data.article?.source
+        binding.tvSourceDate.text = data.article?.sourceDate
         binding.tvNewsOutlet.text = data.article?.sourceDate
         binding.tvNews.text = data.article?.content
     }

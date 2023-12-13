@@ -35,64 +35,70 @@ class LoginActivity : AppCompatActivity() {
             showLoading(it)
         }
 
-        binding.loginButton.setOnClickListener{
+        binding.loginButton.setOnClickListener {
             val email = binding.email.text.toString()
             val password = binding.password.text.toString()
-            viewModel.login(email,password).observe(this){result->
-                if (result!=null){
-                    when (result){
-                        is Result.Success ->{
-                            showLoading(false)
-                            val token = result.data.loginResult?.token
-                            val name = result.data.loginResult?.name
-                            Log.d("Log", "Message : ${result.data.message}")
-                            Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
-                            if (token != null){
-                                Log.d("TokenLog", "Token: $token")
-                                viewModel.saveSession(UserModel(email, name.toString(),token))
-                            }
-                            if(result.data.loginResult?.emailVerifiedAt == null){
-                                AlertDialog.Builder(this).apply {
-                                    setTitle("Login Success!!")
-                                    setMessage("Would you like to verify your account?")
-                                    setNegativeButton("Maybe Later"){_,_->
-                                        val intent = Intent(context, MainActivity::class.java)
-                                        intent.flags =
-                                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                        startActivity(intent)
+            if (email.isEmpty()) {
+                binding.email.error = "Email cannot be empty"
+            } else if (password.isEmpty()) {
+                binding.password.error = "Password cannot be empty"
+            } else {
+                viewModel.login(email, password).observe(this) { result ->
+                    if (result != null) {
+                        when (result) {
+                            is Result.Success -> {
+                                showLoading(false)
+                                val token = result.data.loginResult?.token
+                                val name = result.data.loginResult?.name
+                                Log.d("Log", "Message : ${result.data.message}")
+                                Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
+                                if (token != null) {
+                                    Log.d("TokenLog", "Token: $token")
+                                    viewModel.saveSession(UserModel(email, name.toString(), token))
+                                }
+                                if (result.data.loginResult?.emailVerifiedAt == null) {
+                                    AlertDialog.Builder(this).apply {
+                                        setTitle("Login Success!!")
+                                        setMessage("Would you like to verify your account?")
+                                        setNegativeButton("Maybe Later") { _, _ ->
+                                            val intent = Intent(context, MainActivity::class.java)
+                                            intent.flags =
+                                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                            startActivity(intent)
+                                        }
+                                        setPositiveButton("Verify my Account") { _, _ ->
+                                            val intent = Intent(context, OTPActivity::class.java)
+                                            intent.putExtra("token", result.data.loginResult?.token)
+                                            intent.putExtra("email", result.data.loginResult?.email)
+                                            startActivity(intent)
+                                        }
+                                        create()
+                                        show()
                                     }
-                                    setPositiveButton("Verify my Account"){_,_->
-                                        val intent = Intent(context, OTPActivity::class.java)
-                                        intent.putExtra("token", result.data.loginResult?.token)
-                                        intent.putExtra("email", result.data.loginResult?.email)
-                                        startActivity(intent)
+                                } else {
+                                    AlertDialog.Builder(this).apply {
+                                        setTitle("Mau Masuk?")
+                                        setMessage("Berhasil Login!")
+                                        setPositiveButton("Login") { _, _ ->
+                                            val intent = Intent(context, MainActivity::class.java)
+                                            intent.flags =
+                                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                            startActivity(intent)
+                                        }
+                                        create()
+                                        show()
                                     }
-                                    create()
-                                    show()
                                 }
                             }
-                            else{
-                                AlertDialog.Builder(this).apply {
-                                    setTitle("Mau Masuk?")
-                                    setMessage("Berhasil Login!")
-                                    setPositiveButton("Login"){_,_->
-                                        val intent = Intent(context, MainActivity::class.java)
-                                        intent.flags =
-                                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                        startActivity(intent)
-                                    }
-                                    create()
-                                    show()
-                                }
-                            }
-                        }
-                        is Result.Error ->{
-                            showLoading(false)
-                            Log.d("Log", "Message : ${result.error}")
-                            Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
-                        }
 
-                        is Result.Loading -> showLoading(true)
+                            is Result.Error -> {
+                                showLoading(false)
+                                Log.d("Log", "Message : ${result.error}")
+                                Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                            }
+
+                            is Result.Loading -> showLoading(true)
+                        }
                     }
                 }
             }

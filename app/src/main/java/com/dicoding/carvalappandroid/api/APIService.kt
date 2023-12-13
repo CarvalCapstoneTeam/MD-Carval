@@ -6,6 +6,7 @@ import com.dicoding.carvalappandroid.response.LoginResponse
 import com.dicoding.carvalappandroid.response.OTPResponse
 import com.dicoding.carvalappandroid.response.RegisterResponse
 import com.dicoding.carvalappandroid.response.ResultResponse
+import com.dicoding.carvalappandroid.response.VerifiedResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -35,6 +36,13 @@ interface APIService {
     suspend fun verifyEmail(
         @Field("email") email : String,
     ) : OTPResponse
+
+    @FormUrlEncoded
+    @POST("verify-email")
+    suspend fun sendOTP(
+        @Field("email") email : String,
+        @Field("otp") otp : String
+    ) : VerifiedResponse
 
     @GET("articles")
     suspend fun getArticles() : ArticleResponse

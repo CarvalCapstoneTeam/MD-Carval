@@ -13,6 +13,7 @@ import com.dicoding.carvalappandroid.ui.login.LoginViewModel
 import com.dicoding.carvalappandroid.ui.onboarding.BoardingViewModel
 import com.dicoding.carvalappandroid.ui.otp.OTPViewModel
 import com.dicoding.carvalappandroid.ui.register.RegisterViewModel
+import com.dicoding.carvalappandroid.ui.splashscreen.SplashScreenViewModel
 
 class ViewModelFactory(private val repository: JobRepository): ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
@@ -52,6 +53,10 @@ class ViewModelFactory(private val repository: JobRepository): ViewModelProvider
 
             modelClass.isAssignableFrom(OTPViewModel::class.java) -> {
                 OTPViewModel(repository) as T
+            }
+
+            modelClass.isAssignableFrom(SplashScreenViewModel::class.java) -> {
+                SplashScreenViewModel(repository) as T
             }
 
             else -> throw IllegalArgumentException("Unknown VM Class : " + modelClass.name)

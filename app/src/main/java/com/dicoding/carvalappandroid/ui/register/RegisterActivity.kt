@@ -41,25 +41,34 @@ class RegisterActivity : AppCompatActivity() {
             val password = binding.password.text.toString()
             val password2 = binding.confirmPassword.text.toString()
 
-            viewModel.register(name, email, password, password2).observe(this){result->
-                if (result!=null){
-                    when(result){
-                        is Result.Success->{
-                            showLoading(false)
-                            Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this, LoginActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                            startActivity(intent)
+            when{
+                email.isEmpty() -> binding.etEmail.error = "Email cannot be empty"
+                name.isEmpty() -> binding.name.error = "Name cannot be empty"
+                password.isEmpty() -> binding.password.error = "Password cannot be empty"
+                password2.isEmpty() -> binding.confirmPassword.error = "Confirm Password cannot be empty"
+                password != password2 -> binding.confirmPassword.error = "Password and Confirm Password doesn't match"
+                else ->{
+                    viewModel.register(name, email, password, password2).observe(this){result->
+                        if (result!=null){
+                            when(result){
+                                is Result.Success->{
+                                    showLoading(false)
+                                    Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
+                                    val intent = Intent(this, LoginActivity::class.java)
+                                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                    startActivity(intent)
+                                }
+
+                                is Result.Error -> {
+                                    showLoading(false)
+                                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                                }
+                                is Result.Loading -> showLoading(true)
+                            }
                         }
 
-                        is Result.Error -> {
-                            showLoading(false)
-                            Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
-                        }
-                        is Result.Loading -> showLoading(true)
                     }
                 }
-
             }
         }
 
