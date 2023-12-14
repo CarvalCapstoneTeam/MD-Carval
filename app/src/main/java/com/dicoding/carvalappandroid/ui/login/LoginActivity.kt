@@ -38,8 +38,11 @@ class LoginActivity : AppCompatActivity() {
         binding.loginButton.setOnClickListener {
             val email = binding.email.text.toString()
             val password = binding.password.text.toString()
+
+
             if (email.isEmpty()) {
                 binding.email.error = "Email cannot be empty"
+                binding.email.requestFocus()
             } else if (password.isEmpty()) {
                 binding.password.error = "Password cannot be empty"
             } else {

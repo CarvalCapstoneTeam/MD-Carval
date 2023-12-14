@@ -20,7 +20,7 @@ import com.dicoding.carvalappandroid.utils.ViewModelFactory
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    private lateinit var adapter : ArticleAdapter
+    private lateinit var adapter : HomeFragmentAdapter
     private val viewModel by viewModels<HomeViewModel> {
         ViewModelFactory.getInstance(requireActivity(), true)
     }
@@ -28,7 +28,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = ArticleAdapter()
+        adapter = HomeFragmentAdapter()
         binding.rvArticle.adapter = adapter
 
     }

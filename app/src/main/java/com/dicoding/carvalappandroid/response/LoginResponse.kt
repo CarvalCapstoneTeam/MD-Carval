@@ -11,7 +11,8 @@ data class LoginResponse(
     val error: Boolean? = null,
 
     @field:SerializedName("message")
-    val message: String? = null
+    val message: String? = null,
+
 )
 
 data class LoginResult(

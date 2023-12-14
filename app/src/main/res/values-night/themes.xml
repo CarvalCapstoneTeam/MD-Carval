@@ -13,4 +13,8 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="ThemeName" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorOnSurfaceVariant">#FFFFFF</item>
+    </style>
 </resources>

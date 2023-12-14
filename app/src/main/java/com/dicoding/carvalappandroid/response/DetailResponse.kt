@@ -17,6 +17,9 @@ data class DetailResponse(
 
 data class Article(
 
+    @field:SerializedName("news_writer")
+    val newsWriter: String? = null,
+
     @field:SerializedName("thumbnail")
     val thumbnail: String? = null,
 

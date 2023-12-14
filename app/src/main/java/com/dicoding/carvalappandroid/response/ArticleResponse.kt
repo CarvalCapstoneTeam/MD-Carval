@@ -72,6 +72,9 @@ data class ListArticle(
 @Entity(tableName = "article")
 data class DataItem(
 
+	@field:SerializedName("news_writer")
+	val newsWriter: String? = null,
+
 	@field:SerializedName("thumbnail")
 	val thumbnail: String? = null,
 

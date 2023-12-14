@@ -55,8 +55,8 @@ class DetailArticleActivity : AppCompatActivity() {
             .load(data.article?.thumbnail)
             .into(binding.ivThumbnail)
         binding.tvTitleDetail.text = data.article?.title
-        binding.tvPenulis.text = data.article?.source
-        binding.tvSourceDate.text = data.article?.sourceDate
+        binding.tvPenulis.text = data.article?.newsWriter
+        binding.tvSourceDate.text = data.article?.source
         binding.tvNewsOutlet.text = data.article?.sourceDate
         binding.tvNews.text = data.article?.content
     }

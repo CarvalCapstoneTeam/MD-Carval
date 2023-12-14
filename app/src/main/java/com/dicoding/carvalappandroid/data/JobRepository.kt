@@ -30,13 +30,13 @@ class JobRepository constructor(
     private val apiService: APIService,
     private val tokenPref: TokenPreference
 ) {
-
     fun login(email: String, password: String) = liveData {
         emit(Result.Loading)
         try {
             val success = apiService.login(email, password)
             emit(Result.Success(success))
-        } catch (e: HttpException) {
+        }
+        catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()
             val errorResponse = Gson().fromJson(errorBody, LoginResponse::class.java)
             emit(errorResponse.message?.let { Result.Error(it) })

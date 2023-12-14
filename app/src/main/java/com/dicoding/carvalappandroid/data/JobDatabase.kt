@@ -10,7 +10,7 @@ import com.dicoding.carvalappandroid.response.DataItem
 
 @Database(
     entities = [DataItem::class, RemoteKeys::class],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 abstract class JobDatabase : RoomDatabase() {

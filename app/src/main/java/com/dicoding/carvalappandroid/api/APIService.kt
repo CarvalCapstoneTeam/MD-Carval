@@ -49,6 +49,7 @@ interface APIService {
 
     @GET("articles")
     suspend fun getArticlesUnlimited(
+        @Query("keyword") keyword : String? = null,
         @Query("page") page : Int = 1,
         @Query("size") size : Int = 20
     ) : ArticleResponse

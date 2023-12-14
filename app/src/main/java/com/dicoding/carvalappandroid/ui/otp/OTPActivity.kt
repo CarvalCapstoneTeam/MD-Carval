@@ -125,9 +125,27 @@ class OTPActivity : AppCompatActivity() {
             val digit4 = binding.editTextDigit4.text
             val digit = "$digit1$digit2$digit3$digit4"
             if (email != null) {
-                viewModel.sendOTP(email, digit)
+                viewModel.sendOTP(email, digit).observe(this) { result ->
+                    if (result != null) {
+                        when (result) {
+                            is Result.Success -> {
+                                Log.d("Log", "Message : ${result.data.message}")
+                                Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
+                            }
+
+                            is Result.Error -> Toast.makeText(
+                                this,
+                                result.error,
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            is Result.Loading -> Toast.makeText(this, "Loading", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+                }
+
             }
         }
-
     }
 }
