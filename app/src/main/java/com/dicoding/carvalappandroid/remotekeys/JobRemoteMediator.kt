@@ -13,7 +13,8 @@ import com.dicoding.carvalappandroid.response.DataItem
 @OptIn(ExperimentalPagingApi::class)
 class JobRemoteMediator(
     private val database: JobDatabase,
-    private val apiService: APIService
+    private val apiService: APIService,
+    private val searchQuery: String? = null
 ) : RemoteMediator<Int, DataItem>() {
 
     private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, DataItem>): RemoteKeys? {
@@ -73,7 +74,7 @@ class JobRemoteMediator(
         Log.d("JobRemoteMediator", "Page: $page, Load Type: $loadType")
 
         return try {
-            val responseData = apiService.getArticlesUnlimited(null, page, state.config.pageSize).listArticle?.data
+            val responseData = apiService.getArticlesUnlimited(searchQuery, page, state.config.pageSize).listArticle?.data
             val endOfPaginationReached = responseData!!.isEmpty()
 
             database.withTransaction {

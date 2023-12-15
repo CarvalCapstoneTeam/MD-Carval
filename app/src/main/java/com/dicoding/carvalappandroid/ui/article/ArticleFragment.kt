@@ -34,9 +34,6 @@ class ArticleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         adapter = ArticleAdapter()
         binding.rvArticle.adapter = adapter
-        val sv = binding.searchView
-        val sb = binding.searchBar
-
     }
 
 
@@ -49,6 +46,20 @@ class ArticleFragment : Fragment() {
         _binding = FragmentArticleBinding.inflate(inflater, container, false)
         val root: View = binding.root
         binding.searchBar.hint = "Search for News"
+
+        with(binding){
+            searchView.setupWithSearchBar(searchBar)
+            searchView
+                .editText
+                .setOnEditorActionListener{textView, actionId, event ->
+                    searchBar.setText(searchView.text)
+                    searchView.hide()
+                    viewModel.setSearchQuery(searchBar.text.toString())
+                    false
+                }
+        }
+
+
         binding.rvArticle.layoutManager = LinearLayoutManager(requireActivity())
         val dividerItemDecoration =
             DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)

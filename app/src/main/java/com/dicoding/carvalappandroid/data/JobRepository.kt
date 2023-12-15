@@ -80,12 +80,12 @@ class JobRepository constructor(
     }
 
     @OptIn(ExperimentalPagingApi::class)
-    fun getArticleUnlimited(): LiveData<PagingData<DataItem>> {
+    fun getArticleUnlimited(searchQuery : String? = null): LiveData<PagingData<DataItem>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 5
             ),
-            remoteMediator = JobRemoteMediator(jobDatabase, apiService),
+            remoteMediator = JobRemoteMediator(jobDatabase, apiService, searchQuery),
             pagingSourceFactory = {
                 jobDatabase.jobDAO().getAllArticle()
             }

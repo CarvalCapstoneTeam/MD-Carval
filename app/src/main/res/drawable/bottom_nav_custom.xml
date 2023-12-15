@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/bottom_nav_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/white" />
+    <corners android:topLeftRadius="24dp" android:topRightRadius="24dp" />
+    <padding android:bottom="8dp" />
+    <stroke
+        android:color="#000000"
+        android:width="1dp"/>
+    <size android:height="35dp" />
+    <path android:fillColor="@color/purple_500">
+        <corners android:topLeftRadius="0dp" android:topRightRadius="0dp" />
+        <size android:height="16dp" />
+    </path>
+</shape>

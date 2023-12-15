@@ -1,5 +1,6 @@
 package com.dicoding.carvalappandroid.ui.otp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -8,6 +9,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.dicoding.carvalappandroid.MainActivity
 import com.dicoding.carvalappandroid.R
 import com.dicoding.carvalappandroid.databinding.ActivityOtpactivityBinding
 import com.dicoding.carvalappandroid.databinding.ActivityRegisterBinding
@@ -133,11 +135,15 @@ class OTPActivity : AppCompatActivity() {
                                 Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
                             }
 
-                            is Result.Error -> Toast.makeText(
-                                this,
-                                result.error,
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            is Result.Error -> {
+                                Toast.makeText(
+                                    this,
+                                    result.error,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                val intentToMain = Intent(this, MainActivity::class.java)
+                                startActivity(intentToMain)
+                            }
 
                             is Result.Loading -> Toast.makeText(this, "Loading", Toast.LENGTH_SHORT)
                                 .show()

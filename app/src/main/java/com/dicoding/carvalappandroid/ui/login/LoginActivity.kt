@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.carvalappandroid.MainActivity
+import com.dicoding.carvalappandroid.R
 import com.dicoding.carvalappandroid.databinding.ActivityLoginBinding
 import com.dicoding.carvalappandroid.ui.home.HomeFragment
 import com.dicoding.carvalappandroid.ui.otp.OTPActivity
@@ -16,6 +17,7 @@ import com.dicoding.carvalappandroid.ui.register.RegisterActivity
 import com.dicoding.carvalappandroid.utils.Result
 import com.dicoding.carvalappandroid.utils.UserModel
 import com.dicoding.carvalappandroid.utils.ViewModelFactory
+import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.MainScope
 
 
@@ -24,6 +26,7 @@ class LoginActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this, false)
     }
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var customAlertDialog: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,24 +63,43 @@ class LoginActivity : AppCompatActivity() {
                                     viewModel.saveSession(UserModel(email, name.toString(), token))
                                 }
                                 if (result.data.loginResult?.emailVerifiedAt == null) {
-                                    AlertDialog.Builder(this).apply {
-                                        setTitle("Login Success!!")
-                                        setMessage("Would you like to verify your account?")
-                                        setNegativeButton("Maybe Later") { _, _ ->
-                                            val intent = Intent(context, MainActivity::class.java)
-                                            intent.flags =
-                                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                            startActivity(intent)
-                                        }
-                                        setPositiveButton("Verify my Account") { _, _ ->
-                                            val intent = Intent(context, OTPActivity::class.java)
-                                            intent.putExtra("token", result.data.loginResult?.token)
-                                            intent.putExtra("email", result.data.loginResult?.email)
-                                            startActivity(intent)
-                                        }
-                                        create()
-                                        show()
+                                    val builder = AlertDialog.Builder(this)
+                                    val customAlertDialogView = View.inflate(this, R.layout.layout_login, null)
+                                    val customVerifyButton = customAlertDialogView.findViewById<MaterialButton>(R.id.btn_verify)
+                                    val customContinueButton = customAlertDialogView.findViewById<MaterialButton>(R.id.btn_continue)
+                                    customVerifyButton.setOnClickListener{
+                                        val intent = Intent(this, OTPActivity::class.java)
+                                        intent.putExtra("token", result.data.loginResult?.token)
+                                        intent.putExtra("email", result.data.loginResult?.email)
+                                        startActivity(intent)
                                     }
+                                    customContinueButton.setOnClickListener{
+                                        val intent = Intent(this, MainActivity::class.java)
+                                        intent.flags =
+                                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                        startActivity(intent)
+                                    }
+                                    builder.setView(customAlertDialogView)
+                                    customAlertDialog = builder.create()
+                                    customAlertDialog.show()
+//                                    AlertDialog.Builder(this).apply {
+//                                        setTitle("Login Success!!")
+//                                        setMessage("Would you like to verify your account?")
+//                                        setNegativeButton("Maybe Later") { _, _ ->
+//                                            val intent = Intent(context, MainActivity::class.java)
+//                                            intent.flags =
+//                                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                                            startActivity(intent)
+//                                        }
+//                                        setPositiveButton("Verify my Account") { _, _ ->
+//                                            val intent = Intent(context, OTPActivity::class.java)
+//                                            intent.putExtra("token", result.data.loginResult?.token)
+//                                            intent.putExtra("email", result.data.loginResult?.email)
+//                                            startActivity(intent)
+//                                        }
+//                                        create()
+//                                        show()
+//                                    }
                                 } else {
                                     AlertDialog.Builder(this).apply {
                                         setTitle("Mau Masuk?")

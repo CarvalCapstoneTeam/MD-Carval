@@ -15,7 +15,6 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:textSize="28dp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
