@@ -21,7 +21,7 @@ class APIConfig {
                 .addInterceptor(authInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://carval.hmifunsri.com/api/")
+                .baseUrl("https://carval.cloud/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

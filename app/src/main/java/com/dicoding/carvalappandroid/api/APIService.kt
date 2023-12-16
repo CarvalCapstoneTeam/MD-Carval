@@ -1,16 +1,20 @@
 package com.dicoding.carvalappandroid.api
 
 import com.dicoding.carvalappandroid.response.ArticleResponse
+import com.dicoding.carvalappandroid.response.ChangePasswordResponse
+import com.dicoding.carvalappandroid.response.CheckTokenResponse
 import com.dicoding.carvalappandroid.response.DetailResponse
 import com.dicoding.carvalappandroid.response.LoginResponse
 import com.dicoding.carvalappandroid.response.OTPResponse
 import com.dicoding.carvalappandroid.response.RegisterResponse
 import com.dicoding.carvalappandroid.response.ResultResponse
+import com.dicoding.carvalappandroid.response.UpdateProfileResponse
 import com.dicoding.carvalappandroid.response.VerifiedResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -46,6 +50,24 @@ interface APIService {
 
     @GET("articles")
     suspend fun getArticles() : ArticleResponse
+
+    @POST("check-token")
+    suspend fun checkToken() : CheckTokenResponse
+
+    @FormUrlEncoded
+    @PUT("update-profile")
+    suspend fun updateProfile(
+        @Field("name") name : String,
+        @Field("email") email : String
+    ) : UpdateProfileResponse
+
+    @FormUrlEncoded
+    @PUT("change-password")
+    suspend fun changePassword(
+        @Field("current_password") currentPassword : String,
+        @Field("new_password") newPassword : String,
+        @Field("new_password_confirmation") newPasswordConfirmation : String,
+    ) : ChangePasswordResponse
 
     @GET("articles")
     suspend fun getArticlesUnlimited(

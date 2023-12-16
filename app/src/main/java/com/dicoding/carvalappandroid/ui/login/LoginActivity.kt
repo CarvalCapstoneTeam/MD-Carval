@@ -3,7 +3,9 @@ package com.dicoding.carvalappandroid.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -82,37 +84,25 @@ class LoginActivity : AppCompatActivity() {
                                     builder.setView(customAlertDialogView)
                                     customAlertDialog = builder.create()
                                     customAlertDialog.show()
-//                                    AlertDialog.Builder(this).apply {
-//                                        setTitle("Login Success!!")
-//                                        setMessage("Would you like to verify your account?")
-//                                        setNegativeButton("Maybe Later") { _, _ ->
-//                                            val intent = Intent(context, MainActivity::class.java)
-//                                            intent.flags =
-//                                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//                                            startActivity(intent)
-//                                        }
-//                                        setPositiveButton("Verify my Account") { _, _ ->
-//                                            val intent = Intent(context, OTPActivity::class.java)
-//                                            intent.putExtra("token", result.data.loginResult?.token)
-//                                            intent.putExtra("email", result.data.loginResult?.email)
-//                                            startActivity(intent)
-//                                        }
-//                                        create()
-//                                        show()
-//                                    }
                                 } else {
-                                    AlertDialog.Builder(this).apply {
-                                        setTitle("Mau Masuk?")
-                                        setMessage("Berhasil Login!")
-                                        setPositiveButton("Login") { _, _ ->
-                                            val intent = Intent(context, MainActivity::class.java)
-                                            intent.flags =
-                                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                            startActivity(intent)
-                                        }
-                                        create()
-                                        show()
+                                    val inflater = LayoutInflater.from(this)
+                                    val builder = AlertDialog.Builder(this)
+                                    val customAlertDialogView = inflater.inflate(R.layout.layout_login, null)
+                                    val customVerifyButton = customAlertDialogView.findViewById<MaterialButton>(R.id.btn_verify)
+                                    val customDesc = customAlertDialogView.findViewById<TextView>(R.id.login_desc)
+                                    val customContinueButton = customAlertDialogView.findViewById<MaterialButton>(R.id.btn_continue)
+                                    customDesc.text = "Login Successfull! Press Continue \nto go into the app"
+                                    customVerifyButton.text = "Continue"
+                                    customContinueButton.visibility = View.GONE
+                                    customVerifyButton.setOnClickListener{
+                                        val intent = Intent(this, MainActivity::class.java)
+                                        intent.flags =
+                                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                        startActivity(intent)
                                     }
+                                    builder.setView(customAlertDialogView)
+                                    customAlertDialog = builder.create()
+                                    customAlertDialog.show()
                                 }
                             }
 

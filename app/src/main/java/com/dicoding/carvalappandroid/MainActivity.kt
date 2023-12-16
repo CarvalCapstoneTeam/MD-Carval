@@ -3,6 +3,8 @@ package com.dicoding.carvalappandroid
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -12,8 +14,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.dicoding.carvalappandroid.databinding.ActivityMainBinding
+import com.dicoding.carvalappandroid.ui.login.LoginActivity
 import com.dicoding.carvalappandroid.ui.onboarding.BoardingActivity
 import com.dicoding.carvalappandroid.utils.NightMode
+import com.dicoding.carvalappandroid.utils.Result
 import com.dicoding.carvalappandroid.utils.ViewModelFactory
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -43,6 +47,26 @@ class MainActivity : AppCompatActivity() {
         }
 
         val navView: BottomNavigationView = binding.navView
+
+        viewModel.checkToken().observe(this){result->
+            when(result){
+                is Result.Success->{
+                    Log.d("Log", "Message : ${result.data.message}")
+                }
+
+                is Result.Error -> {
+                    Log.d("Log", "Message : ${result.error}")
+                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                    val intentToLogin = Intent(this, LoginActivity::class.java)
+                    startActivity(intentToLogin)
+                    viewModel.logout()
+                }
+
+                is Result.Loading -> {
+                    Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
 
         val shapeAppearance = ShapeAppearanceModel.builder()
             .setTopLeftCorner(CornerFamily.ROUNDED, 70.0F)

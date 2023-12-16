@@ -12,11 +12,14 @@ import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.dicoding.carvalappandroid.api.APIService
 import com.dicoding.carvalappandroid.remotekeys.JobRemoteMediator
+import com.dicoding.carvalappandroid.response.ChangePasswordResponse
+import com.dicoding.carvalappandroid.response.CheckTokenResponse
 import com.dicoding.carvalappandroid.response.DataItem
 import com.dicoding.carvalappandroid.response.DetailResponse
 import com.dicoding.carvalappandroid.response.LoginResponse
 import com.dicoding.carvalappandroid.response.OTPResponse
 import com.dicoding.carvalappandroid.response.RegisterResponse
+import com.dicoding.carvalappandroid.response.UpdateProfileResponse
 import com.dicoding.carvalappandroid.response.VerifiedResponse
 import com.dicoding.carvalappandroid.setting.TokenPreference
 import com.dicoding.carvalappandroid.utils.Result
@@ -56,6 +59,36 @@ class JobRepository constructor(
             val errorBody = e.response()?.errorBody()?.string()
             val errorResponse = Gson().fromJson(errorBody, RegisterResponse::class.java)
             emit(Result.Error(errorResponse.message))
+        }
+    }
+
+    fun checkToken() : LiveData<Result<CheckTokenResponse>> = liveData{
+        emit(Result.Loading)
+        try {
+            val response = apiService.checkToken()
+            emit(Result.Success(response))
+        }catch (e : Exception){
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun changePassword(password: String, newPassword: String, newPassword2:String) : LiveData<Result<ChangePasswordResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.changePassword(password, newPassword, newPassword2)
+            emit(Result.Success(response))
+        }catch (e:Exception){
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun updateProfile(name : String, email : String) : LiveData<Result<UpdateProfileResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.updateProfile(name, email)
+            emit(Result.Success(response))
+        }catch (e:Exception){
+            emit(Result.Error(e.message.toString()))
         }
     }
 

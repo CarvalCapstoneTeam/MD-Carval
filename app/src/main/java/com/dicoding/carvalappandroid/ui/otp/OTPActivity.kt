@@ -133,6 +133,8 @@ class OTPActivity : AppCompatActivity() {
                             is Result.Success -> {
                                 Log.d("Log", "Message : ${result.data.message}")
                                 Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
+                                val intentToMain = Intent(this, MainActivity::class.java)
+                                startActivity(intentToMain)
                             }
 
                             is Result.Error -> {
@@ -141,8 +143,6 @@ class OTPActivity : AppCompatActivity() {
                                     result.error,
                                     Toast.LENGTH_SHORT
                                 ).show()
-                                val intentToMain = Intent(this, MainActivity::class.java)
-                                startActivity(intentToMain)
                             }
 
                             is Result.Loading -> Toast.makeText(this, "Loading", Toast.LENGTH_SHORT)
