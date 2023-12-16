@@ -23,6 +23,7 @@ import com.dicoding.carvalappandroid.ui.login.LoginActivity
 import com.dicoding.carvalappandroid.ui.onboarding.BoardingActivity
 import com.dicoding.carvalappandroid.ui.otp.OTPActivity
 import com.dicoding.carvalappandroid.utils.Result
+import com.dicoding.carvalappandroid.utils.UserModel
 import com.dicoding.carvalappandroid.utils.ViewModelFactory
 import com.google.android.material.button.MaterialButton
 
@@ -76,7 +77,46 @@ class AboutFragment : Fragment() {
                     when(result){
                         is Result.Success->{
                             Log.d("Log", "Message : ${result.data.message}")
-//                            viewModel.saveSession(etData1.text.toString(), etData2.text.toString()) save session supaya update ke UI
+                            viewModel.saveDataUser(etData1.text.toString(), etData2.text.toString())
+                            customAlertDialog.dismiss()
+                        }
+
+                        is Result.Error -> {
+                            Log.d("Log", "Message : ${result.error}")
+                            Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
+                        }
+
+                        is Result.Loading -> {
+                            Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+            builder.setView(customAlertDialogView)
+            customAlertDialog = builder.create()
+            customAlertDialog.show()
+        }
+
+        binding.btnChange.setOnClickListener {
+            val builder = AlertDialog.Builder(requireContext())
+            val customAlertDialogView = View.inflate(requireContext(), R.layout.layout_profile_change, null)
+            val tvData1 = customAlertDialogView.findViewById<TextView>(R.id.tv_data1)
+            val etData1 = customAlertDialogView.findViewById<TextView>(R.id.et_data1)
+            val tvData2 = customAlertDialogView.findViewById<TextView>(R.id.tv_data2)
+            val etData2 = customAlertDialogView.findViewById<TextView>(R.id.et_data2)
+            val tvData3 = customAlertDialogView.findViewById<TextView>(R.id.tv_data3)
+            val etData3 = customAlertDialogView.findViewById<TextView>(R.id.et_data3)
+            val btnSubmit = customAlertDialogView.findViewById<TextView>(R.id.submit)
+
+            tvData1.text = "Current Password"
+            tvData2.text = "New Password"
+            tvData3.text = "New Password Confirmation"
+
+            btnSubmit.setOnClickListener {
+                viewModel.changePassword(etData1.text.toString(), etData2.text.toString(), etData3.text.toString()).observe(viewLifecycleOwner){result->
+                    when(result){
+                        is Result.Success->{
+                            Log.d("Log", "Message : ${result.data.message}")
                             customAlertDialog.dismiss()
                         }
 

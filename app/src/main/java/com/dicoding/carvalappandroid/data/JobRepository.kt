@@ -154,6 +154,10 @@ class JobRepository constructor(
         tokenPref.saveSession(userModel)
     }
 
+    suspend fun saveDataUser(name : String, email : String) {
+        tokenPref.saveDataUser(name, email)
+    }
+
     suspend fun saveVerified(userModel: UserModel) {
         tokenPref.saveVerified(userModel)
     }

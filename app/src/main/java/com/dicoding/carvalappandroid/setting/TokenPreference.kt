@@ -26,6 +26,13 @@ class TokenPreference private constructor(private val dataStore : DataStore<Pref
         }
     }
 
+    suspend fun saveDataUser(username : String, email : String ){
+        dataStore.edit { preferences->
+            preferences[USERNAME_KEY] = username
+            preferences[EMAIL_KEY] = email
+        }
+    }
+
     suspend fun saveVerified(user: UserModel){
         dataStore.edit { preferences ->
             preferences[IS_VERIFIED_KEY] =  user.isVerified

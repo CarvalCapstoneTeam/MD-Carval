@@ -20,15 +20,17 @@ class AboutViewModel(private val repository: JobRepository) : ViewModel() {
 
     fun updateProfile(name : String, email : String) = repository.updateProfile(name, email)
 
+    fun changePassword(password : String, newPassword : String, newPassword2: String) = repository.changePassword(password, newPassword, newPassword2)
+
     fun logout(){
         viewModelScope.launch {
             repository.logout()
         }
     }
 
-    fun saveSession(userModel: UserModel){
+    fun saveDataUser(name : String, email: String){
         viewModelScope.launch {
-            repository.saveSession(userModel)
+            repository.saveDataUser(name, email)
         }
     }
 }
