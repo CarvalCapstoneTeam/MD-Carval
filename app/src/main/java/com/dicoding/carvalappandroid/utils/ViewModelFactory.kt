@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.carvalappandroid.MainViewModel
+import com.dicoding.carvalappandroid.data.HomeRepository
 import com.dicoding.carvalappandroid.data.JobRepository
 import com.dicoding.carvalappandroid.ui.about.AboutViewModel
 import com.dicoding.carvalappandroid.ui.article.ArticleViewModel
@@ -29,10 +30,6 @@ class ViewModelFactory(private val repository: JobRepository): ViewModelProvider
 
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
                 MainViewModel(repository) as T
-            }
-
-            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
-                HomeViewModel(repository) as T
             }
 
             modelClass.isAssignableFrom(BoardingViewModel::class.java) -> {
@@ -76,5 +73,6 @@ class ViewModelFactory(private val repository: JobRepository): ViewModelProvider
             }
             return instance as ViewModelFactory
         }
+
     }
 }

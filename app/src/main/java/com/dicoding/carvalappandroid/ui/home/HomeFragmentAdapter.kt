@@ -5,14 +5,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dicoding.carvalappandroid.databinding.ListHomeArticleBinding
 import com.dicoding.carvalappandroid.databinding.ListItemArticleBinding
 import com.dicoding.carvalappandroid.response.DataItem
+import com.dicoding.carvalappandroid.response.HomeDataItem
 import com.dicoding.carvalappandroid.ui.detail.DetailArticleActivity
 
-class HomeFragmentAdapter : PagingDataAdapter<DataItem, HomeFragmentAdapter.ViewHolder>(DIFF_CALLBACK) {
+class HomeFragmentAdapter : ListAdapter<HomeDataItem, HomeFragmentAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ListHomeArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -26,7 +28,7 @@ class HomeFragmentAdapter : PagingDataAdapter<DataItem, HomeFragmentAdapter.View
     }
 
     class ViewHolder(private val binding : ListHomeArticleBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: DataItem){
+        fun bind(item: HomeDataItem){
             binding.tvTitle.text = item.title
             binding.tvTime.text = item.sourceDate
             binding.tvWriter.text = item.newsWriter
@@ -42,17 +44,17 @@ class HomeFragmentAdapter : PagingDataAdapter<DataItem, HomeFragmentAdapter.View
     }
 
     companion object{
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataItem>() {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<HomeDataItem>() {
             override fun areItemsTheSame(
-                oldItem: DataItem,
-                newItem: DataItem
+                oldItem: HomeDataItem,
+                newItem: HomeDataItem
             ): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: DataItem,
-                newItem: DataItem
+                oldItem: HomeDataItem,
+                newItem: HomeDataItem
             ): Boolean {
                 return oldItem == newItem
             }

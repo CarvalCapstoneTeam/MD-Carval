@@ -31,7 +31,7 @@ import retrofit2.HttpException
 class JobRepository constructor(
     private val jobDatabase: JobDatabase,
     private val apiService: APIService,
-    private val tokenPref: TokenPreference
+    private val tokenPref: TokenPreference,
 ) {
     fun login(email: String, password: String) = liveData {
         emit(Result.Loading)
@@ -66,6 +66,7 @@ class JobRepository constructor(
         emit(Result.Loading)
         try {
             val response = apiService.checkToken()
+
             emit(Result.Success(response))
         }catch (e : Exception){
             emit(Result.Error(e.message.toString()))

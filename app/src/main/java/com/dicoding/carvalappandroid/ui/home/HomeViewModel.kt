@@ -7,22 +7,27 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.dicoding.carvalappandroid.data.HomeRepository
 import com.dicoding.carvalappandroid.data.JobRepository
 import com.dicoding.carvalappandroid.response.DataItem
+import com.dicoding.carvalappandroid.response.HomeDataItem
+import com.dicoding.carvalappandroid.utils.Result
 import com.dicoding.carvalappandroid.utils.UserModel
 
-class HomeViewModel (private val repository: JobRepository) : ViewModel() {
+class HomeViewModel (private val repository: HomeRepository) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
+    private val _dataLoaded = MutableLiveData<Boolean>()
+    val dataLoaded: LiveData<Boolean> get() = _dataLoaded
 
     fun getSession(): LiveData<UserModel> {
         return repository.getSession().asLiveData()
     }
 
-    val getArticleUnlimited : LiveData<PagingData<DataItem>> =
-        repository.getArticleUnlimited().cachedIn(viewModelScope)
+    fun getArticle(): LiveData<Result<List<HomeDataItem>>> {
+        return repository.getArticle()
+    }
 
-    val text: LiveData<String> = _text
+    fun getData(): LiveData<List<HomeDataItem>>{
+        return repository.getData()
+    }
 }

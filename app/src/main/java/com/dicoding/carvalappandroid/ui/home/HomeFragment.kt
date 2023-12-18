@@ -1,6 +1,7 @@
 package com.dicoding.carvalappandroid.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,16 +14,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.carvalappandroid.R
 import com.dicoding.carvalappandroid.databinding.FragmentArticleBinding
 import com.dicoding.carvalappandroid.databinding.FragmentHomeBinding
+import com.dicoding.carvalappandroid.response.HomeDataItem
 import com.dicoding.carvalappandroid.setting.SettingsActivity
 import com.dicoding.carvalappandroid.ui.article.ArticleAdapter
+import com.dicoding.carvalappandroid.utils.Result
 import com.dicoding.carvalappandroid.utils.ViewModelFactory
+import com.dicoding.carvalappandroid.utils.ViewModelFactoryHome
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private lateinit var adapter : HomeFragmentAdapter
     private val viewModel by viewModels<HomeViewModel> {
-        ViewModelFactory.getInstance(requireActivity(), true)
+        ViewModelFactoryHome.getInstanceHome(requireActivity(), true)
     }
     private val binding get() = _binding!!
 
@@ -44,14 +48,49 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        binding.rvArticle.layoutManager = LinearLayoutManager(requireActivity())
+        binding.rvArticle.layoutManager = LinearLayoutManager(context)
         val dividerItemDecoration =
             DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
         binding.rvArticle.addItemDecoration(dividerItemDecoration)
 
-        viewModel.getArticleUnlimited.observe(viewLifecycleOwner) {
-            adapter.submitData(viewLifecycleOwner.lifecycle, it)
+
+        viewModel.getArticle().observe(viewLifecycleOwner) {result->
+            when(result){
+                is Result.Loading ->{
+                    Log.d("Loading", "Currently Loading" )
+                }
+
+                is Result.Success -> {
+                    adapter.submitList(result.data)
+                }
+
+                is  Result.Error -> {
+                    Log.d("ErrorArticle", "Error : ${result.error}")
+                }
+            }
         }
+
+//        viewModel.getData().observe(viewLifecycleOwner){result->
+////            if (result == null){
+////                viewModel.getArticle().observe(viewLifecycleOwner) {result->
+////                    when(result){
+////                        is Result.Loading ->{
+////                            Log.d("Loading", "Currently Loading" )
+////                        }
+////
+////                        is Result.Success -> {
+////                            adapter.submitList(result.data)
+////                        }
+////
+////                        is  Result.Error -> {
+////                            Log.d("ErrorArticle", "Error : ${result.error}")
+////                        }
+////                    }
+////                }
+////            }else {
+//                adapter.submitList(result)
+////            }
+//        }
 
         viewModel.getSession().observe(requireActivity()){session->
             if (_binding != null) {

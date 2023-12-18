@@ -4,6 +4,7 @@ import com.dicoding.carvalappandroid.response.ArticleResponse
 import com.dicoding.carvalappandroid.response.ChangePasswordResponse
 import com.dicoding.carvalappandroid.response.CheckTokenResponse
 import com.dicoding.carvalappandroid.response.DetailResponse
+import com.dicoding.carvalappandroid.response.HomeArticleResponse
 import com.dicoding.carvalappandroid.response.LoginResponse
 import com.dicoding.carvalappandroid.response.OTPResponse
 import com.dicoding.carvalappandroid.response.RegisterResponse
@@ -49,7 +50,11 @@ interface APIService {
     ) : VerifiedResponse
 
     @GET("articles")
-    suspend fun getArticles() : ArticleResponse
+    suspend fun getArticles(
+        @Query("keyword") keyword : String? = null,
+        @Query("page") page : Int = 1,
+        @Query("size") size : Int = 40
+    ) : HomeArticleResponse
 
     @POST("check-token")
     suspend fun checkToken() : CheckTokenResponse
