@@ -12,7 +12,7 @@
         android:orientation="vertical"
         android:padding="6dp"
         android:background="@drawable/corner_radius"
-        android:backgroundTint="#DDF2FD">
+        android:backgroundTint="#DDE7F2">
 
         <TextView
             android:id="@+id/tv_Title"
