@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.carvalappandroid.MainActivity
 import com.dicoding.carvalappandroid.R
 import com.dicoding.carvalappandroid.databinding.ActivityLoginBinding
+import com.dicoding.carvalappandroid.ui.forgot.ForgotPassActivity
 import com.dicoding.carvalappandroid.ui.home.HomeFragment
 import com.dicoding.carvalappandroid.ui.otp.OTPActivity
 import com.dicoding.carvalappandroid.ui.register.RegisterActivity
@@ -38,6 +39,11 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel.isLoading.observe(this){
             showLoading(it)
+        }
+
+        binding.forgotPassword.setOnClickListener {
+            val intentForgot = Intent(this, ForgotPassActivity::class.java)
+            startActivity(intentForgot)
         }
 
         binding.loginButton.setOnClickListener {

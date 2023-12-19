@@ -2,9 +2,11 @@ package com.dicoding.carvalappandroid.ui.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html.fromHtml
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.text.HtmlCompat
 import com.bumptech.glide.Glide
 import com.dicoding.carvalappandroid.R
 import com.dicoding.carvalappandroid.databinding.ActivityDetailArticleBinding
@@ -59,6 +61,7 @@ class DetailArticleActivity : AppCompatActivity() {
         binding.tvSourceDate.text = data.article?.source
         binding.tvNewsOutlet.text = data.article?.sourceDate
         binding.tvNews.text = data.article?.content
+//        fromHtml(data.article?.content, HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

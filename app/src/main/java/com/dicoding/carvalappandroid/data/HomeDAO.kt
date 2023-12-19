@@ -13,7 +13,7 @@ interface HomeDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertArticle(article: List<HomeDataItem>)
 
-    @Query("Select * from home_article")
+    @Query("Select * from home_article LIMIT 5")
     fun getAllArticle(): LiveData<List<HomeDataItem>>
 
 }

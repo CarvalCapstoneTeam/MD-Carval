@@ -1,10 +1,12 @@
 package com.dicoding.carvalappandroid.ui.home
 
+import android.health.connect.datatypes.units.Length
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -52,45 +54,15 @@ class HomeFragment : Fragment() {
         val dividerItemDecoration =
             DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
         binding.rvArticle.addItemDecoration(dividerItemDecoration)
+        binding.rvArticle.scrollToPosition(5)
 
 
-        viewModel.getArticle().observe(viewLifecycleOwner) {result->
-            when(result){
-                is Result.Loading ->{
-                    Log.d("Loading", "Currently Loading" )
-                }
 
-                is Result.Success -> {
-                    adapter.submitList(result.data)
-                }
+        viewModel.getArticle()
 
-                is  Result.Error -> {
-                    Log.d("ErrorArticle", "Error : ${result.error}")
-                }
-            }
+        viewModel.getData().observe(viewLifecycleOwner){result->
+            adapter.submitList(result)
         }
-
-//        viewModel.getData().observe(viewLifecycleOwner){result->
-////            if (result == null){
-////                viewModel.getArticle().observe(viewLifecycleOwner) {result->
-////                    when(result){
-////                        is Result.Loading ->{
-////                            Log.d("Loading", "Currently Loading" )
-////                        }
-////
-////                        is Result.Success -> {
-////                            adapter.submitList(result.data)
-////                        }
-////
-////                        is  Result.Error -> {
-////                            Log.d("ErrorArticle", "Error : ${result.error}")
-////                        }
-////                    }
-////                }
-////            }else {
-//                adapter.submitList(result)
-////            }
-//        }
 
         viewModel.getSession().observe(requireActivity()){session->
             if (_binding != null) {

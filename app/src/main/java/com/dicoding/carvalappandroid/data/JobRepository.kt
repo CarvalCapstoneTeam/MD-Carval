@@ -12,11 +12,14 @@ import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.dicoding.carvalappandroid.api.APIService
 import com.dicoding.carvalappandroid.remotekeys.JobRemoteMediator
+import com.dicoding.carvalappandroid.response.ChangePassResponse
 import com.dicoding.carvalappandroid.response.ChangePasswordResponse
 import com.dicoding.carvalappandroid.response.CheckTokenResponse
 import com.dicoding.carvalappandroid.response.DataItem
 import com.dicoding.carvalappandroid.response.DetailResponse
+import com.dicoding.carvalappandroid.response.ForgotResponse
 import com.dicoding.carvalappandroid.response.LoginResponse
+import com.dicoding.carvalappandroid.response.OTPForgotResponse
 import com.dicoding.carvalappandroid.response.OTPResponse
 import com.dicoding.carvalappandroid.response.RegisterResponse
 import com.dicoding.carvalappandroid.response.UpdateProfileResponse
@@ -107,6 +110,36 @@ class JobRepository constructor(
         emit(Result.Loading)
         try {
             val response = apiService.sendOTP(email, otp)
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun getOTPReset(email: String): LiveData<Result<ForgotResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.sendOTPReset(email)
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun sendOTPReset(email: String, otp : String): LiveData<Result<OTPForgotResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.resetCode(email, otp)
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun resetPassword(email: String, newPassword: String, newPassword2:String): LiveData<Result<ChangePassResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.resetPass(email, newPassword, newPassword2)
             emit(Result.Success(response))
         } catch (e: Exception) {
             emit(Result.Error(e.message.toString()))
