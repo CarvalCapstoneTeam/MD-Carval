@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -14,14 +16,12 @@ import com.dicoding.carvalappandroid.MainActivity
 import com.dicoding.carvalappandroid.R
 import com.dicoding.carvalappandroid.databinding.ActivityLoginBinding
 import com.dicoding.carvalappandroid.ui.forgot.ForgotPassActivity
-import com.dicoding.carvalappandroid.ui.home.HomeFragment
 import com.dicoding.carvalappandroid.ui.otp.OTPActivity
 import com.dicoding.carvalappandroid.ui.register.RegisterActivity
 import com.dicoding.carvalappandroid.utils.Result
 import com.dicoding.carvalappandroid.utils.UserModel
 import com.dicoding.carvalappandroid.utils.ViewModelFactory
 import com.google.android.material.button.MaterialButton
-import kotlinx.coroutines.MainScope
 
 
 class LoginActivity : AppCompatActivity() {
@@ -61,6 +61,7 @@ class LoginActivity : AppCompatActivity() {
                     if (result != null) {
                         when (result) {
                             is Result.Success -> {
+                                val overlayLayout = layoutInflater.inflate(R.layout.dim_background, null) as FrameLayout
                                 showLoading(false)
                                 val token = result.data.loginResult?.token
                                 val name = result.data.loginResult?.name
@@ -89,7 +90,14 @@ class LoginActivity : AppCompatActivity() {
                                     }
                                     builder.setView(customAlertDialogView)
                                     customAlertDialog = builder.create()
-                                    customAlertDialog.show()
+                                    (window.decorView as ViewGroup).addView(overlayLayout)
+                                    customAlertDialog.window?.setDimAmount(0.8f)
+                                    if(!isFinishing){
+                                        customAlertDialog.show()
+                                    }
+                                    customAlertDialog.setOnDismissListener {
+                                        (window.decorView as ViewGroup).removeView(overlayLayout)
+                                    }
                                 } else {
                                     val inflater = LayoutInflater.from(this)
                                     val builder = AlertDialog.Builder(this)
@@ -108,7 +116,11 @@ class LoginActivity : AppCompatActivity() {
                                     }
                                     builder.setView(customAlertDialogView)
                                     customAlertDialog = builder.create()
+                                    (window.decorView as ViewGroup).addView(overlayLayout)
                                     customAlertDialog.show()
+                                    customAlertDialog.setOnDismissListener {
+                                        (window.decorView as ViewGroup).removeView(overlayLayout)
+                                    }
                                 }
                             }
 

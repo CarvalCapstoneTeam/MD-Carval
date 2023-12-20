@@ -12,6 +12,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ui.login.LoginActivity">
 
+    <View
+        android:id="@+id/dimBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone" />
+
     <ImageView
         android:id="@+id/iv_loginWorkers"
         android:layout_width="match_parent"

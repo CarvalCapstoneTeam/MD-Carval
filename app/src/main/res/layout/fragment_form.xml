@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-
+    android:layout_marginBottom="?attr/actionBarSize"
     tools:context=".ui.form.FormFragment">
 
     <LinearLayout
@@ -346,6 +346,7 @@
 <!--            />-->
 
         <Button
+            android:id="@+id/btn_submit"
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:layout_marginTop="24dp"
@@ -356,7 +357,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:text="Submit"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="64dp"/>
+            android:layout_marginBottom="24dp"/>
 
     </LinearLayout>
 </ScrollView>

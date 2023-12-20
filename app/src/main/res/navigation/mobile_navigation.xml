@@ -9,13 +9,26 @@
         android:id="@+id/navigation_home"
         android:name="com.dicoding.carvalappandroid.ui.home.HomeFragment"
         android:label=""
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_firstFragment_to_secondFragment"
+            app:destination="@id/navigation_form"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
 
     <fragment
         android:id="@+id/navigation_form"
         android:name="com.dicoding.carvalappandroid.ui.form.FormFragment"
         android:label=""
-        tools:layout="@layout/fragment_form" />
+        tools:layout="@layout/fragment_form" >
+        <action
+            android:id="@+id/action_secondFragment_to_firstFragment"
+            app:destination="@id/navigation_home"
+            app:popUpTo="@id/navigation_form"
+            app:popUpToInclusive="true"/>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_article"

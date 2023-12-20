@@ -8,6 +8,7 @@ import com.dicoding.carvalappandroid.response.DetailResponse
 import com.dicoding.carvalappandroid.response.ForgotResponse
 import com.dicoding.carvalappandroid.response.HomeArticleResponse
 import com.dicoding.carvalappandroid.response.LoginResponse
+import com.dicoding.carvalappandroid.response.ModelResponse
 import com.dicoding.carvalappandroid.response.OTPForgotResponse
 import com.dicoding.carvalappandroid.response.OTPResponse
 import com.dicoding.carvalappandroid.response.RegisterResponse
@@ -51,6 +52,20 @@ interface APIService {
         @Field("email") email: String,
         @Field("otp") otp: String
     ): VerifiedResponse
+
+    @FormUrlEncoded
+    @POST("predict")
+    suspend fun sendResult(
+        @Field("title") jobName: String,
+        @Field("location") location : String,
+        @Field("department") department: String,
+        @Field("salary_range") salaryRange: String,
+        @Field("company_profile") profile: String,
+        @Field("description") description: String,
+        @Field("requirement") requirement: String,
+        @Field("benefits") benefits: String,
+        @Field("telecommuting") telecommuting: Int
+    ) : ModelResponse
 
     @GET("articles")
     suspend fun getArticles(

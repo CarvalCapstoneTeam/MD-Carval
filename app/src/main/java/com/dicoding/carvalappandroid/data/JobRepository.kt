@@ -1,7 +1,6 @@
 package com.dicoding.carvalappandroid.data
 
 import android.content.ContentValues.TAG
-import android.nfc.Tag
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
@@ -19,6 +18,7 @@ import com.dicoding.carvalappandroid.response.DataItem
 import com.dicoding.carvalappandroid.response.DetailResponse
 import com.dicoding.carvalappandroid.response.ForgotResponse
 import com.dicoding.carvalappandroid.response.LoginResponse
+import com.dicoding.carvalappandroid.response.ModelResponse
 import com.dicoding.carvalappandroid.response.OTPForgotResponse
 import com.dicoding.carvalappandroid.response.OTPResponse
 import com.dicoding.carvalappandroid.response.RegisterResponse
@@ -70,6 +70,17 @@ class JobRepository constructor(
         try {
             val response = apiService.checkToken()
 
+            emit(Result.Success(response))
+        }catch (e : Exception){
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun sendResult(name : String, location : String, department : String, salaryRange : String, companyProfile : String, description : String, requirement : String
+                   , benefits : String, telecommuting : Int) : LiveData<Result<ModelResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.sendResult(name, location,department,salaryRange,companyProfile,description,requirement,benefits,telecommuting)
             emit(Result.Success(response))
         }catch (e : Exception){
             emit(Result.Error(e.message.toString()))
