@@ -13,6 +13,7 @@ import com.dicoding.carvalappandroid.databinding.ActivitySplashScreenBinding
 import com.dicoding.carvalappandroid.ui.onboarding.BoardingActivity
 import com.dicoding.carvalappandroid.utils.ViewModelFactory
 
+@SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashScreenBinding

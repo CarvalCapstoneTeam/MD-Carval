@@ -8,13 +8,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.InspectableProperty
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -34,8 +37,6 @@ class FormFragment : Fragment() {
         ViewModelFactory.getInstance(requireActivity(), false)
     }
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -46,6 +47,38 @@ class FormFragment : Fragment() {
 
         _binding = FragmentFormBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        viewModel.getSession().observe(viewLifecycleOwner){result->
+            if (!result.isVerified){
+                val overlayLayout = layoutInflater.inflate(R.layout.dim_background, null) as FrameLayout
+                val builder = AlertDialog.Builder(requireContext())
+                val customAlertDialogView = View.inflate(requireContext(), R.layout.layout_verify, null)
+                val customVerifyButton = customAlertDialogView.findViewById<MaterialButton>(R.id.btn_verify)
+                val customContinueButton = customAlertDialogView.findViewById<MaterialButton>(R.id.btn_continue)
+                customVerifyButton.setOnClickListener{
+                    val intent = Intent(requireContext(), OTPActivity::class.java)
+                    intent.putExtra("token", result.token)
+                    intent.putExtra("email", result.email)
+                    startActivity(intent)
+                }
+                customContinueButton.setOnClickListener{
+                    customAlertDialog.dismiss()
+                    findNavController().navigate(R.id.action_secondFragment_to_firstFragment)
+                }
+                builder.setView(customAlertDialogView)
+                customAlertDialog = builder.create()
+                (requireActivity().window.decorView as ViewGroup).addView(overlayLayout)
+                customAlertDialog.window?.setDimAmount(0.8f)
+                if(!requireActivity().isFinishing){
+                    customAlertDialog.show()
+                }
+                customAlertDialog.setOnDismissListener {
+                    (context as? FragmentActivity)?.let { activity ->
+                        activity.window.decorView as? ViewGroup
+                    }?.removeView(overlayLayout)
+                }
+            }
+        }
 
         binding.btnSubmit.setOnClickListener {
             val jobName = binding.etName.text.toString()
@@ -74,9 +107,11 @@ class FormFragment : Fragment() {
                             }
                         }
                         Log.d("Loading", "$benefit, $telecommuting" )
+                        showLoading(true)
                     }
 
                     is Result.Success -> {
+                        showLoading(false)
                         val builder = AlertDialog.Builder(requireContext())
                         val customAlertDialogView = View.inflate(requireContext(), R.layout.layout_result, null)
                         val logo = customAlertDialogView.findViewById<ImageView>(R.id.data_real)
@@ -85,13 +120,15 @@ class FormFragment : Fragment() {
                         val tryAgain = customAlertDialogView.findViewById<MaterialButton>(R.id.btn_try)
                         val home = customAlertDialogView.findViewById<TextView>(R.id.btn_home)
 
-                        if (result.data.predictionResult?.prediction == "real"){
+                        if (result.data.predictionResult?.prediction == "Real"){
                             accuracy.text = "Real Probability = " + result.data.predictionResult.realProbability.toString()
+                            Log.d("Log", "Message : " + result.data.predictionResult.fakeProbability.toString())
                         }else{
                             logo.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.result_fake))
                             resultTitle.text = "Fake"
                             resultTitle.setTextColor(Color.RED)
                             accuracy.text = "Fake Probability = " + result.data.predictionResult?.fakeProbability.toString()
+                            Log.d("Log", "Message : " + result.data.predictionResult?.realProbability.toString())
                             accuracy.setTextColor(Color.RED)
                         }
 
@@ -118,10 +155,12 @@ class FormFragment : Fragment() {
                         customAlertDialog = builder.create()
                         customAlertDialog.show()
 
-                        Log.d("Loading", "Messgeaeaea : ${result.data.message}" )
+                        Log.d("Loading", "Message : ${result.data.message}" )
                     }
 
                     is  Result.Error -> {
+                        showLoading(false)
+                        Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
                         Log.d("ErrorArticle", "Error : ${result.error}")
                     }
                 }
@@ -130,6 +169,10 @@ class FormFragment : Fragment() {
 
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         return root
+    }
+
+    private fun showLoading(it: Boolean?) {
+        binding.progressBar.visibility = if (it==true) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {

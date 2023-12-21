@@ -22,9 +22,9 @@
     <ImageView
         android:id="@+id/iv_loginWorkers"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:src="@drawable/workerslogin2"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -49,18 +49,6 @@
         android:textSize="14sp"
         android:text="Login with your Account to \n receive full access of this app "
         android:gravity="center"/>
-    <TextView
-        android:id="@+id/tv_Email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
-        android:text="Email"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <EditText
         android:id="@+id/email"
@@ -71,25 +59,15 @@
         android:layout_marginTop="8dp"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_Email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:background="@drawable/border_radius"
         android:paddingStart="17dp"
         android:paddingEnd="17dp"
          />
 
-    <TextView
-        android:id="@+id/tv_Password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"
-        android:text="Password"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/email"/>
 
     <EditText
         android:id="@+id/password"
@@ -104,7 +82,7 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_Password"
+        app:layout_constraintTop_toBottomOf="@id/email"
         android:background="@drawable/border_radius"
         android:paddingStart="17dp"
         android:paddingEnd="17dp"/>
@@ -161,26 +139,9 @@
         android:text="Forgot Password?"
         android:textSize="13sp"
         android:textColor="#005BAC"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/password"/>
-
-<!--    <com.google.android.material.button.MaterialButton-->
-<!--        android:id="@+id/register"-->
-<!--        android:enabled="true"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="48dp"-->
-<!--        android:layout_gravity="start"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:layout_marginBottom="64dp"-->
-<!--        android:backgroundTint="#164863"-->
-<!--        app:cornerRadius="12dp"-->
-<!--        android:text="Register"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/et_Reminder"-->
-<!--        app:layout_constraintVertical_bias="0.2" />-->
 
     <ProgressBar
         android:id="@+id/loading"

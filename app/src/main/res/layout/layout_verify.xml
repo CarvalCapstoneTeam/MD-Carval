@@ -9,26 +9,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <ImageView
-        android:id="@+id/login_success"
-        android:layout_width="wrap_content"
-        android:layout_height="180dp"
-        android:src="@drawable/centanglogin"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-
     <TextView
         android:id="@+id/login_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/login_success"
-        android:text="Login Successfull"
-        android:textColor="#5E8B7E"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:text="Verify Your Account!"
         android:layout_marginTop="24dp"
         android:textSize="24sp"
         android:textStyle="bold"/>
@@ -39,8 +27,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/login_text"
         android:gravity="center"
-        android:text="Looks like you haven't \nverified your account yet,\nwould you like to verify your account?"
-        android:textColor="#5E8B7E"
+        android:text="This feature will only be accesible \nonce you verified you have verified\n your account"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="12dp"

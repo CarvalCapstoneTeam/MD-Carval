@@ -9,6 +9,9 @@ import com.dicoding.carvalappandroid.utils.Result
 
 class DetailViewModel (private val repository: JobRepository) : ViewModel(){
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
     fun getDetailStory(id : String) :LiveData<Result<DetailResponse>>{
         return repository.getDetailArticle(id)
     }

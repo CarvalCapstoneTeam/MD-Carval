@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.dicoding.carvalappandroid.MainActivity
@@ -29,8 +30,36 @@ class OTPResetActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val email = intent.getStringExtra("emailReset")
-        Toast.makeText(this, email, Toast.LENGTH_SHORT).show()
         binding.tvDesc.text = "Masukkan 4 digit kode OTP telah dikirimkan ke \n" + email
+
+        viewModel.isLoading.observe(this){
+            showLoading(it)
+        }
+
+        binding.resend.setOnClickListener{
+            if (email != null) {
+                viewModel.getOTPReset(email).observe(this){result->
+                    when(result){
+                        is Result.Success->{
+                            Log.d("Log", "Message : ${result.data.message}")
+                            showLoading(false)
+                            val intentReset = Intent(this, OTPResetActivity::class.java)
+                            intentReset.putExtra("emailReset", email)
+                            startActivity(intentReset)
+                        }
+
+                        is Result.Error -> {
+                            Log.d("Log", "Message : ${result.error}")
+                            Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                            showLoading(false)
+                        }
+
+                        is Result.Loading -> showLoading(true)
+                    }
+
+                }
+            }
+        }
 
         binding.editTextDigit1.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -106,27 +135,28 @@ class OTPResetActivity : AppCompatActivity() {
                         when (result) {
                             is Result.Success -> {
                                 Log.d("Log", "Message : ${result.data.message}")
-                                Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
+                                showLoading(false)
                                 val intentReset = Intent(this, PassResetActivity::class.java)
                                 intentReset.putExtra("emailReset", email)
                                 startActivity(intentReset)
                             }
 
                             is Result.Error -> {
-                                Toast.makeText(
-                                    this,
-                                    result.error,
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                showLoading(false)
+                                Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                                Log.d("Error", "Message : ${result.error}")
                             }
 
-                            is Result.Loading -> Toast.makeText(this, "Loading", Toast.LENGTH_SHORT)
-                                .show()
+                            is Result.Loading -> showLoading(true)
                         }
                     }
                 }
             }
 
         }
+    }
+
+    private fun showLoading(it: Boolean?) {
+        binding.progressBar.visibility = if (it==true) View.VISIBLE else View.GONE
     }
 }

@@ -66,7 +66,6 @@ class LoginActivity : AppCompatActivity() {
                                 val token = result.data.loginResult?.token
                                 val name = result.data.loginResult?.name
                                 Log.d("Log", "Message : ${result.data.message}")
-                                Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
                                 if (token != null) {
                                     Log.d("TokenLog", "Token: $token")
                                     viewModel.saveSession(UserModel(email, name.toString(), token))
@@ -92,13 +91,15 @@ class LoginActivity : AppCompatActivity() {
                                     customAlertDialog = builder.create()
                                     (window.decorView as ViewGroup).addView(overlayLayout)
                                     customAlertDialog.window?.setDimAmount(0.8f)
-                                    if(!isFinishing){
+                                    if(!isFinishing && !isDestroyed){
                                         customAlertDialog.show()
                                     }
                                     customAlertDialog.setOnDismissListener {
+                                        if(!isFinishing)
                                         (window.decorView as ViewGroup).removeView(overlayLayout)
                                     }
                                 } else {
+                                    viewModel.saveVerified()
                                     val inflater = LayoutInflater.from(this)
                                     val builder = AlertDialog.Builder(this)
                                     val customAlertDialogView = inflater.inflate(R.layout.layout_login, null)
@@ -126,8 +127,8 @@ class LoginActivity : AppCompatActivity() {
 
                             is Result.Error -> {
                                 showLoading(false)
+                                Toast.makeText(this, "Wrong Email or Password", Toast.LENGTH_SHORT).show()
                                 Log.d("Log", "Message : ${result.error}")
-                                Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
                             }
 
                             is Result.Loading -> showLoading(true)

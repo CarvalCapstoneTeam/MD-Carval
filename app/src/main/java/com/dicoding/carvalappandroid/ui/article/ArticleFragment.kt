@@ -59,11 +59,14 @@ class ArticleFragment : Fragment() {
                 }
         }
 
-
         binding.rvArticle.layoutManager = LinearLayoutManager(requireActivity())
         val dividerItemDecoration =
             DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
         binding.rvArticle.addItemDecoration(dividerItemDecoration)
+
+        viewModel.isLoading.observe(viewLifecycleOwner){
+            showLoading(it)
+        }
 
         viewModel.getArticleUnlimited.observe(viewLifecycleOwner) {
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
@@ -72,6 +75,10 @@ class ArticleFragment : Fragment() {
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
         return root
+    }
+
+    private fun showLoading(it: Boolean?) {
+        binding.progressBar.visibility = if (it==true) View.VISIBLE else View.GONE
     }
 
 

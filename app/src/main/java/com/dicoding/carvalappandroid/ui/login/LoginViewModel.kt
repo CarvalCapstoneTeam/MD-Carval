@@ -24,5 +24,11 @@ class LoginViewModel(private val repository: JobRepository) : ViewModel() {
         }
     }
 
+    fun saveVerified(){
+        viewModelScope.launch {
+            repository.saveVerified()
+        }
+    }
+
 
 }

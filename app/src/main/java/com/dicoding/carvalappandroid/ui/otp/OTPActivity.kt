@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.MotionEvent
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.dicoding.carvalappandroid.MainActivity
@@ -25,13 +26,15 @@ class OTPActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_otpactivity)
 
         binding = ActivityOtpactivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        viewModel.isLoading.observe(this){
+            showLoading(it)
+        }
+
         val email = intent.getStringExtra("email")
-        val token = intent.getStringExtra("token")
 
         binding.tvDesc.text = "Masukkan 4 digit kode OTP telah dikirimkan ke \n" + email
 
@@ -56,6 +59,31 @@ class OTPActivity : AppCompatActivity() {
             }
         } else {
             Toast.makeText(this, "Gagal mendapatkan email", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.resend.setOnClickListener {
+            if (email != null) {
+                Toast.makeText(this, email, Toast.LENGTH_SHORT).show()
+                viewModel.verification(email).observe(this) { result ->
+                    when (result) {
+                        is Result.Loading -> {
+                            Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
+                        }
+
+                        is Result.Error -> {
+                            Log.d("Log", "Message : ${result.error}")
+                            Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                        }
+
+                        is Result.Success -> {
+                            Log.d("Log", "Message : ${result.data.message}")
+                            Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            } else {
+                Toast.makeText(this, "Gagal mendapatkan email", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.editTextDigit1.addTextChangedListener(object : TextWatcher {
@@ -132,26 +160,28 @@ class OTPActivity : AppCompatActivity() {
                         when (result) {
                             is Result.Success -> {
                                 Log.d("Log", "Message : ${result.data.message}")
-                                Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
+                                showLoading(false)
+                                viewModel.saveVerified()
                                 val intentToMain = Intent(this, MainActivity::class.java)
                                 startActivity(intentToMain)
                             }
 
                             is Result.Error -> {
-                                Toast.makeText(
-                                    this,
-                                    result.error,
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                showLoading(false)
+                                Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                                Log.d("Log", "Error : ${result.error}")
                             }
 
-                            is Result.Loading -> Toast.makeText(this, "Loading", Toast.LENGTH_SHORT)
-                                .show()
+                            is Result.Loading -> showLoading(true)
                         }
                     }
                 }
 
             }
         }
+    }
+
+    private fun showLoading(it: Boolean?) {
+        binding.progressBar.visibility = if (it==true) View.VISIBLE else View.GONE
     }
 }

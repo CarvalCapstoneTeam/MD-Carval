@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.dicoding.carvalappandroid.R
@@ -25,8 +26,11 @@ class PassResetActivity : AppCompatActivity() {
         binding = ActivityPassResetBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        viewModel.isLoading.observe(this){
+            showLoading(it)
+        }
+
         val email = intent.getStringExtra("emailReset")
-        Toast.makeText(this, email, Toast.LENGTH_SHORT).show()
         Log.d("Log", "Email : $email")
 
         binding.sendButton.setOnClickListener{
@@ -37,24 +41,25 @@ class PassResetActivity : AppCompatActivity() {
                     when(result){
                         is Result.Success->{
                             Log.d("Log", "Message : ${result.data.message}")
-                            Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
+                            showLoading(false)
                             val intentToMain = Intent(this, LoginActivity::class.java)
                             startActivity(intentToMain)
                         }
 
                         is Result.Error -> {
-                            Toast.makeText(
-                                this,
-                                result.error,
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            Log.d("Error", "Message : ${result.error}")
+                            Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                            showLoading(false)
                         }
 
-                        is Result.Loading -> Toast.makeText(this, "Loading", Toast.LENGTH_SHORT)
-                            .show()
+                        is Result.Loading -> showLoading(true)
                     }
                 }
             }
         }
+    }
+
+    private fun showLoading(it: Boolean?) {
+        binding.progressBar.visibility = if (it==true) View.VISIBLE else View.GONE
     }
 }

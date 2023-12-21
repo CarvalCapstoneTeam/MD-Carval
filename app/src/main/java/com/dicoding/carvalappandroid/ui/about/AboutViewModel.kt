@@ -18,6 +18,9 @@ class AboutViewModel(private val repository: JobRepository) : ViewModel() {
         return repository.getSession().asLiveData()
     }
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
     fun updateProfile(name : String, email : String) = repository.updateProfile(name, email)
 
     fun changePassword(password : String, newPassword : String, newPassword2: String) = repository.changePassword(password, newPassword, newPassword2)

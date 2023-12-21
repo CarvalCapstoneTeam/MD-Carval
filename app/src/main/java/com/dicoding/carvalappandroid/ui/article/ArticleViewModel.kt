@@ -15,6 +15,9 @@ class ArticleViewModel(private val repository: JobRepository) : ViewModel() {
     private val _searchQuery = MutableLiveData<String>().apply {
         value = null
     }
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
     val searchQuery: LiveData<String> get() = _searchQuery
 
     fun setSearchQuery(query: String) {

@@ -33,9 +33,9 @@ class TokenPreference private constructor(private val dataStore : DataStore<Pref
         }
     }
 
-    suspend fun saveVerified(user: UserModel){
+    suspend fun saveVerified(){
         dataStore.edit { preferences ->
-            preferences[IS_VERIFIED_KEY] =  user.isVerified
+            preferences[IS_VERIFIED_KEY] =  true
         }
     }
 
@@ -45,7 +45,8 @@ class TokenPreference private constructor(private val dataStore : DataStore<Pref
                 preferences[EMAIL_KEY] ?: "",
                 preferences[USERNAME_KEY] ?: "",
                 preferences[TOKEN_KEY] ?: "",
-                preferences[IS_LOGIN_KEY] ?: false
+                preferences[IS_LOGIN_KEY] ?: false,
+                preferences[IS_VERIFIED_KEY] ?: false
             )
         }
     }

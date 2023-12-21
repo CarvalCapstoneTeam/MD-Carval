@@ -203,8 +203,8 @@ class JobRepository constructor(
         tokenPref.saveDataUser(name, email)
     }
 
-    suspend fun saveVerified(userModel: UserModel) {
-        tokenPref.saveVerified(userModel)
+    suspend fun saveVerified() {
+        tokenPref.saveVerified()
     }
 
     fun getSession(): Flow<UserModel> {

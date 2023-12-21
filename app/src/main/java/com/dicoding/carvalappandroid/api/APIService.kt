@@ -71,7 +71,7 @@ interface APIService {
     suspend fun getArticles(
         @Query("keyword") keyword: String? = null,
         @Query("page") page: Int = 1,
-        @Query("size") size: Int = 20
+        @Query("size") size: Int = 5
     ): HomeArticleResponse
 
     @FormUrlEncoded

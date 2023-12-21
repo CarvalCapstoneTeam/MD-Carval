@@ -3,6 +3,7 @@ package com.dicoding.carvalappandroid.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import androidx.lifecycle.asLiveData
 import com.dicoding.carvalappandroid.api.APIService
 import com.dicoding.carvalappandroid.response.HomeDataItem
 import com.dicoding.carvalappandroid.utils.Result

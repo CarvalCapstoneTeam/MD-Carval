@@ -62,26 +62,24 @@ class HomeFragment : Fragment() {
         }
 
 
-
         viewModel.getArticle().observe(viewLifecycleOwner) {result->
             when(result){
                 is Result.Loading ->{
+                    showLoading(true)
                     Log.d("Loading", "Currently Loading" )
                 }
 
                 is Result.Success -> {
+                    showLoading(false)
                     adapter.submitList(result.data)
                 }
 
                 is  Result.Error -> {
+                    showLoading(false)
                     Log.d("ErrorArticle", "Error : ${result.error}")
                 }
             }
         }
-
-//        viewModel.getData().observe(viewLifecycleOwner){result->
-//            adapter.submitList(result)
-//        }
 
         viewModel.getSession().observe(requireActivity()){session->
             if (_binding != null) {
@@ -94,6 +92,10 @@ class HomeFragment : Fragment() {
         }
 
         return root
+    }
+
+    private fun showLoading(it: Boolean?) {
+        binding.progressBar.visibility = if (it==true) View.VISIBLE else View.GONE
     }
 
 

@@ -37,14 +37,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val preferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-        preferences.getString(
-            getString(R.string.pref_key_dark),
-            getString(R.string.pref_dark_follow_system)
-        )?.apply {
-            val mode = NightMode.valueOf(this.uppercase(Locale.US))
-            AppCompatDelegate.setDefaultNightMode(mode.value)
-        }
+//        val preferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+//        preferences.getString(
+//            getString(R.string.pref_key_dark),
+//            getString(R.string.pref_dark_follow_system)
+//        )?.apply {
+//            val mode = NightMode.valueOf(this.uppercase(Locale.US))
+//            AppCompatDelegate.setDefaultNightMode(mode.value)
+//        }
 
         val navView: BottomNavigationView = binding.navView
 
@@ -56,22 +56,17 @@ class MainActivity : AppCompatActivity() {
 
                 is Result.Error -> {
                     Log.d("Log", "Message : ${result.error}")
-                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
                     val intentToLogin = Intent(this, LoginActivity::class.java)
                     startActivity(intentToLogin)
                     viewModel.logout()
                 }
 
                 is Result.Loading -> {
-                    Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
+                    Log.d("Log", "Checking Token")
                 }
             }
         }
 
-        val shapeAppearance = ShapeAppearanceModel.builder()
-            .setTopLeftCorner(CornerFamily.ROUNDED, 70.0F)
-            .setTopRightCorner(CornerFamily.ROUNDED, 70.0F)
-            .build()
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         navView.setupWithNavController(navController)

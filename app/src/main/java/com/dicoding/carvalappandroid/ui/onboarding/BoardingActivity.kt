@@ -23,13 +23,6 @@ class BoardingActivity : AppCompatActivity() {
         binding = ActivityBoardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        viewModel.getSession().observe(this){
-//            if(it.isLogin){
-//                startActivity(Intent(this, MainActivity::class.java))
-//                finish()
-//            }
-//        }
-
         supportActionBar?.hide()
 
         binding.btnLogin.setOnClickListener{

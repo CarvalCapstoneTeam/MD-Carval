@@ -15,7 +15,8 @@
     <ImageView
         android:id="@+id/iv_loginWorkers"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="12dp"
         android:src="@drawable/workersregister2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,17 +46,6 @@
         android:gravity="center"/>
 
 
-    <TextView
-        android:id="@+id/tv_Email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_descRegister"
-        android:text="Email"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
     <com.dicoding.carvalappandroid.ui.editText.EmailEditText
         android:id="@+id/et_Email"
         android:layout_width="0dp"
@@ -64,26 +54,14 @@
         android:paddingStart="17dp"
         android:paddingEnd="17dp"
         android:hint="Insert Email"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_Email"
+        app:layout_constraintTop_toBottomOf="@id/tv_descRegister"
         android:background="@drawable/border_radius"
         />
-
-    <TextView
-        android:id="@+id/tv_Username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"
-        android:text="Username"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/et_Email"/>
 
     <EditText
         android:id="@+id/name"
@@ -98,21 +76,9 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_Username"
+        app:layout_constraintTop_toBottomOf="@id/et_Email"
         android:background="@drawable/border_radius"
         />
-
-    <TextView
-        android:id="@+id/tv_Password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"
-        android:text="Password"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/name"/>
 
     <EditText
         android:id="@+id/password"
@@ -129,20 +95,8 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_Password"
+        app:layout_constraintTop_toBottomOf="@id/name"
         android:background="@drawable/border_radius"/>
-
-    <TextView
-        android:id="@+id/tv_ConfirmPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"
-        android:text="Confirm Password"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/password"/>
 
     <EditText
         android:id="@+id/confirmPassword"
@@ -159,7 +113,7 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_ConfirmPassword"
+        app:layout_constraintTop_toBottomOf="@id/password"
         android:background="@drawable/border_radius"/>
 
     <com.google.android.material.button.MaterialButton
@@ -168,7 +122,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="start"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="64dp"
         android:backgroundTint="#202A44"
         app:cornerRadius="12dp"

@@ -16,4 +16,7 @@ interface HomeDAO {
     @Query("Select * from home_article LIMIT 5")
     fun getAllArticle(): LiveData<List<HomeDataItem>>
 
+    @Query("DELETE FROM home_article")
+    suspend fun clearAllArticles()
+
 }

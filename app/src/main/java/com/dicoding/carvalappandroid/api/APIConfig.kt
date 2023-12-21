@@ -5,6 +5,7 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 class APIConfig {
     companion object{
@@ -19,6 +20,9 @@ class APIConfig {
 //            val gson = GsonBuilder().setLenient().create()
             val client = OkHttpClient.Builder()
                 .addInterceptor(authInterceptor)
+                .connectTimeout(45, TimeUnit.SECONDS)
+                .readTimeout(45, TimeUnit.SECONDS)
+                .writeTimeout(45, TimeUnit.SECONDS)
                 .build()
             val retrofit = Retrofit.Builder()
                 .baseUrl("https://carval.cloud/api/")
