@@ -118,7 +118,9 @@ class LoginActivity : AppCompatActivity() {
                                     builder.setView(customAlertDialogView)
                                     customAlertDialog = builder.create()
                                     (window.decorView as ViewGroup).addView(overlayLayout)
-                                    customAlertDialog.show()
+                                    if (!isFinishing){
+                                        customAlertDialog.show()
+                                    }
                                     customAlertDialog.setOnDismissListener {
                                         (window.decorView as ViewGroup).removeView(overlayLayout)
                                     }

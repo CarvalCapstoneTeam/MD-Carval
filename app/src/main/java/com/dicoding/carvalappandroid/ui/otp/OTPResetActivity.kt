@@ -38,10 +38,8 @@ class OTPResetActivity : AppCompatActivity() {
                     when(result){
                         is Result.Success->{
                             Log.d("Log", "Message : ${result.data.message}")
+                            Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
                             showLoading(false)
-                            val intentReset = Intent(this, OTPResetActivity::class.java)
-                            intentReset.putExtra("emailReset", email)
-                            startActivity(intentReset)
                         }
 
                         is Result.Error -> {
@@ -131,6 +129,7 @@ class OTPResetActivity : AppCompatActivity() {
                         when (result) {
                             is Result.Success -> {
                                 Log.d("Log", "Message : ${result.data.message}")
+                                Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
                                 showLoading(false)
                                 val intentReset = Intent(this, PassResetActivity::class.java)
                                 intentReset.putExtra("emailReset", email)

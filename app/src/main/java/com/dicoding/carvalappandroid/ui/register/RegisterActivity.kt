@@ -71,9 +71,9 @@ class RegisterActivity : AppCompatActivity() {
 
                 if (p0 != null) {
                     if (!password.any { it.isDigit()}){
-                        binding.password.error = "Password must contain at least 1 number"
+                        binding.confirmPassword.error = "Password must contain at least 1 number"
                     }else if (!password.any{it.isUpperCase()}){
-                        binding.password.error = "Password must contain at least 1 uppercase letter"
+                        binding.confirmPassword.error = "Password must contain at least 1 uppercase letter"
                     }
                 }
             }

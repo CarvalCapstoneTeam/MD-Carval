@@ -19,6 +19,8 @@ class AboutViewModel(private val repository: JobRepository) : ViewModel() {
 
     fun updateProfile(name : String, email : String) = repository.updateProfile(name, email)
 
+    fun getDataUser() = repository.getUserData()
+
     fun changePassword(password : String, newPassword : String, newPassword2: String) = repository.changePassword(password, newPassword, newPassword2)
 
     fun logout(){

@@ -2,6 +2,8 @@ package com.dicoding.carvalappandroid.ui.reset
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -29,6 +31,53 @@ class PassResetActivity : AppCompatActivity() {
         val email = intent.getStringExtra("emailReset")
         Log.d("Log", "Email : $email")
 
+        binding.Pass.addTextChangedListener (object: TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //none
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //none
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                val password = p0.toString()
+
+                if (p0 != null) {
+                    if (!password.any { it.isDigit()}){
+                        binding.Pass.error = "Password must contain at least 1 number"
+                    }else if (!password.any{it.isUpperCase()}){
+                        binding.Pass.error = "Password must contain at least 1 uppercase letter"
+                    }
+                }
+            }
+
+        })
+
+        binding.newPass.addTextChangedListener (object: TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //none
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //none
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                val password = p0.toString()
+
+                if (p0 != null) {
+                    if (!password.any { it.isDigit()}){
+                        binding.newPass.error = "Password must contain at least 1 number"
+                    }else if (!password.any{it.isUpperCase()}){
+                        binding.newPass.error = "Password must contain at least 1 uppercase letter"
+                    }
+                }
+            }
+
+        })
+
+
         binding.sendButton.setOnClickListener{
             if (email != null) {
                 val password = binding.Pass.text.toString()
@@ -38,6 +87,7 @@ class PassResetActivity : AppCompatActivity() {
                         is Result.Success->{
                             Log.d("Log", "Message : ${result.data.message}")
                             showLoading(false)
+                            Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
                             val intentToMain = Intent(this, LoginActivity::class.java)
                             startActivity(intentToMain)
                         }

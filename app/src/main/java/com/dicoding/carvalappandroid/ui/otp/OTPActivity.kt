@@ -40,15 +40,17 @@ class OTPActivity : AppCompatActivity() {
             viewModel.verification(email).observe(this) { result ->
                 when (result) {
                     is Result.Loading -> {
-                        Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
+                        showLoading(true)
                     }
 
                     is Result.Error -> {
+                        showLoading(false)
                         Log.d("Log", "Message : ${result.error}")
                         Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
                     }
 
                     is Result.Success -> {
+                        showLoading(false)
                         Log.d("Log", "Message : ${result.data.message}")
                         Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
                     }
@@ -64,15 +66,17 @@ class OTPActivity : AppCompatActivity() {
                 viewModel.verification(email).observe(this) { result ->
                     when (result) {
                         is Result.Loading -> {
-                            Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
+                            showLoading(true)
                         }
 
                         is Result.Error -> {
+                            showLoading(false)
                             Log.d("Log", "Message : ${result.error}")
                             Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
                         }
 
                         is Result.Success -> {
+                            showLoading(false)
                             Log.d("Log", "Message : ${result.data.message}")
                             Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
                         }
@@ -158,6 +162,7 @@ class OTPActivity : AppCompatActivity() {
                             is Result.Success -> {
                                 Log.d("Log", "Message : ${result.data.message}")
                                 showLoading(false)
+                                Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
                                 viewModel.saveVerified()
                                 val intentToMain = Intent(this, MainActivity::class.java)
                                 startActivity(intentToMain)

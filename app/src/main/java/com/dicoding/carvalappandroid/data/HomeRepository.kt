@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.dicoding.carvalappandroid.api.APIService
 import com.dicoding.carvalappandroid.response.HomeDataItem
+import com.dicoding.carvalappandroid.response.MeResponse
 import com.dicoding.carvalappandroid.setting.TokenPreference
 import com.dicoding.carvalappandroid.utils.Result
 import com.dicoding.carvalappandroid.utils.UserModel
@@ -19,8 +20,18 @@ class HomeRepository(
         return tokenPref.getSession()
     }
 
-    fun getData(): LiveData<List<HomeDataItem>>{
-        return dao.getAllArticle()
+    fun getUserData() : LiveData<Result<MeResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getDataUser()
+            emit(Result.Success(response))
+        }catch (e:Exception){
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    suspend fun saveUsername(name : String) {
+        tokenPref.saveUsername(name)
     }
 
     fun getArticle() : LiveData<Result<List<HomeDataItem>>> = liveData {

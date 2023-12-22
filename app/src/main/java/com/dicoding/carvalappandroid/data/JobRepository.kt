@@ -18,6 +18,7 @@ import com.dicoding.carvalappandroid.response.DataItem
 import com.dicoding.carvalappandroid.response.DetailResponse
 import com.dicoding.carvalappandroid.response.ForgotResponse
 import com.dicoding.carvalappandroid.response.LoginResponse
+import com.dicoding.carvalappandroid.response.MeResponse
 import com.dicoding.carvalappandroid.response.ModelResponse
 import com.dicoding.carvalappandroid.response.OTPForgotResponse
 import com.dicoding.carvalappandroid.response.OTPResponse
@@ -123,6 +124,16 @@ class JobRepository(
             val response = apiService.sendOTP(email, otp)
             emit(Result.Success(response))
         } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun getUserData() : LiveData<Result<MeResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getDataUser()
+            emit(Result.Success(response))
+        }catch (e:Exception){
             emit(Result.Error(e.message.toString()))
         }
     }

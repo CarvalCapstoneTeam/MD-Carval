@@ -89,12 +89,16 @@ class FormFragment : Fragment() {
 
             if(jobName.isEmpty()){
                 binding.etName.error = "This field must not be empty"
+                binding.etName.requestFocus()
             }else if(location.isEmpty()){
                 binding.etLocation.error = "This field must not be empty"
+                binding.etLocation.requestFocus()
             }else if(salary.isEmpty()){
                 binding.etSalary.error = "This field must not be empty"
+                binding.etSalary.requestFocus()
             }else if(profile.isEmpty()){
                 binding.etProfile.error = "This field must not be empty"
+                binding.etProfile.requestFocus()
             }else {
                 viewModel.sendResult(
                     jobName,

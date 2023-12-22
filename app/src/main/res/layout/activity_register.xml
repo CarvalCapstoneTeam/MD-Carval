@@ -15,7 +15,7 @@
     <ImageView
         android:id="@+id/iv_loginWorkers"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="220dp"
         android:layout_marginTop="12dp"
         android:src="@drawable/workersregister2"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_headerLogin"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="6dp"
         android:textSize="14sp"
         android:text="@string/desc_register"
         android:gravity="center"/>

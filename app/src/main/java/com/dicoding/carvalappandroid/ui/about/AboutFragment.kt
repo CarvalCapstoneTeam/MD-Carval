@@ -45,13 +45,37 @@ class AboutFragment : Fragment() {
 
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
-        viewModel.getSession().observe(requireActivity()) { session ->
-            binding.tvName.setText(session.username)
-            binding.tvEmail.setText(session.email)
+        viewModel.getSession().observe(viewLifecycleOwner) { session ->
+            binding.tvName.text = session.username
+            binding.tvEmail.text = session.email
+        }
+
+        viewModel.getDataUser().observe(viewLifecycleOwner) { result ->
+            when(result){
+                is Result.Loading->{
+                    //none
+                }
+
+                is Result.Success->{
+                    viewModel.saveDataUser(
+                        result.data.name.toString(),
+                        result.data.email.toString()
+                    )
+                }
+
+                is Result.Error->{
+                    Toast.makeText(
+                        requireContext(),
+                        "Fail to load data",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+            }
         }
 
         binding.btnEdit.setOnClickListener {
-            val builder = AlertDialog.Builder(requireContext())
+            val builder = AlertDialog.Builder(requireActivity())
             val customAlertDialogView =
                 View.inflate(requireContext(), R.layout.layout_profile_change, null)
             val tvData1 = customAlertDialogView.findViewById<TextView>(R.id.tv_data1)
@@ -69,9 +93,9 @@ class AboutFragment : Fragment() {
             tvData1.text = "Nama"
             tvData2.text = "Email"
 
-            viewModel.getSession().observe(requireActivity()) { session ->
-                etData1.setText(session.username)
-                etData2.setText(session.email)
+            viewModel.getSession().observe(viewLifecycleOwner) { session ->
+                etData1.text = session.username
+                etData2.text = session.email
             }
 
             btnSubmit.setOnClickListener {

@@ -8,6 +8,7 @@ import com.dicoding.carvalappandroid.response.DetailResponse
 import com.dicoding.carvalappandroid.response.ForgotResponse
 import com.dicoding.carvalappandroid.response.HomeArticleResponse
 import com.dicoding.carvalappandroid.response.LoginResponse
+import com.dicoding.carvalappandroid.response.MeResponse
 import com.dicoding.carvalappandroid.response.ModelResponse
 import com.dicoding.carvalappandroid.response.OTPForgotResponse
 import com.dicoding.carvalappandroid.response.OTPResponse
@@ -72,6 +73,9 @@ interface APIService {
         @Query("page") page: Int = 1,
         @Query("size") size: Int = 5
     ): HomeArticleResponse
+
+    @GET("me")
+    suspend fun getDataUser() : MeResponse
 
     @FormUrlEncoded
     @POST("forgot-password")
