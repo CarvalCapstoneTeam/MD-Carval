@@ -30,7 +30,7 @@
         <TextView
             android:id="@+id/tv_Writer"
             android:layout_width="90dp"
-            android:layout_height="17dp"
+            android:layout_height="19dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_Title"
             android:ellipsize="end"
@@ -42,7 +42,7 @@
         <TextView
             android:id="@+id/tv_Time"
             android:layout_width="90dp"
-            android:layout_height="17dp"
+            android:layout_height="18dp"
             android:maxWidth="90dp"
             android:ellipsize="end"
             app:layout_constraintStart_toEndOf="@id/tv_Writer"

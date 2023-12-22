@@ -162,11 +162,11 @@ class AboutFragment : Fragment() {
             val progressBar = customAlertDialogView.findViewById<ProgressBar>(R.id.progressBar)
 
             tvData1.text = "Current Password"
-            tvData1.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+            etData1.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
             tvData2.text = "New Password"
-            tvData2.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+            etData2.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
             tvData3.text = "New Password Confirmation"
-            tvData3.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+            etData3.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
 
             etData2.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {

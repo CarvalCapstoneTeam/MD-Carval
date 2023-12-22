@@ -2,6 +2,8 @@ package com.dicoding.carvalappandroid.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -36,6 +38,29 @@ class LoginActivity : AppCompatActivity() {
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.passwordLogin.addTextChangedListener (object: TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //none
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //none
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                val password = p0.toString()
+
+                if (p0 != null) {
+                    if (!password.any { it.isDigit()}){
+                        binding.passwordLogin.error = "Password must contain at least 1 number"
+                    }else if (!password.any{it.isUpperCase()}){
+                        binding.passwordLogin.error = "Password must contain at least 1 uppercase letter"
+                    }
+                }
+            }
+
+        })
 
         viewModel.isLoading.observe(this){
             showLoading(it)
