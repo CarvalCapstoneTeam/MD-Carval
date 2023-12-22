@@ -3,14 +3,11 @@ package com.dicoding.carvalappandroid.ui.home
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dicoding.carvalappandroid.databinding.ListHomeArticleBinding
-import com.dicoding.carvalappandroid.databinding.ListItemArticleBinding
-import com.dicoding.carvalappandroid.response.DataItem
 import com.dicoding.carvalappandroid.response.HomeDataItem
 import com.dicoding.carvalappandroid.ui.detail.DetailArticleActivity
 

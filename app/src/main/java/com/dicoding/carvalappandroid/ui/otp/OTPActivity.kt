@@ -1,19 +1,17 @@
 package com.dicoding.carvalappandroid.ui.otp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.carvalappandroid.MainActivity
 import com.dicoding.carvalappandroid.R
 import com.dicoding.carvalappandroid.databinding.ActivityOtpactivityBinding
-import com.dicoding.carvalappandroid.databinding.ActivityRegisterBinding
 import com.dicoding.carvalappandroid.utils.Result
 import com.dicoding.carvalappandroid.utils.ViewModelFactory
 
@@ -36,7 +34,7 @@ class OTPActivity : AppCompatActivity() {
 
         val email = intent.getStringExtra("email")
 
-        binding.tvDesc.text = "Masukkan 4 digit kode OTP telah dikirimkan ke \n" + email
+        binding.tvDesc.text = getString(R.string.description_OTP, email)
 
         if (email != null) {
             viewModel.verification(email).observe(this) { result ->

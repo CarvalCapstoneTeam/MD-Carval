@@ -47,15 +47,16 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.loginButton.setOnClickListener {
-            val email = binding.email.text.toString()
-            val password = binding.password.text.toString()
+            val email = binding.emailLogin.text.toString()
+            val password = binding.passwordLogin.text.toString()
 
 
             if (email.isEmpty()) {
-                binding.email.error = "Email cannot be empty"
-                binding.email.requestFocus()
+                binding.emailLogin.error = "Email cannot be empty"
+                binding.emailLogin.requestFocus()
             } else if (password.isEmpty()) {
-                binding.password.error = "Password cannot be empty"
+                binding.passwordLogin.error = "Password cannot be empty"
+                binding.emailLogin.requestFocus()
             } else {
                 viewModel.login(email, password).observe(this) { result ->
                     if (result != null) {
@@ -73,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
                                 if (result.data.loginResult?.emailVerifiedAt == null) {
                                     val builder = AlertDialog.Builder(this)
                                     val customAlertDialogView = View.inflate(this, R.layout.layout_login, null)
-                                    val customVerifyButton = customAlertDialogView.findViewById<MaterialButton>(R.id.btn_verify)
+                                    val customVerifyButton = customAlertDialogView.findViewById<MaterialButton>(R.id.btn_verify_login)
                                     val customContinueButton = customAlertDialogView.findViewById<MaterialButton>(R.id.btn_continue)
                                     customVerifyButton.setOnClickListener{
                                         val intent = Intent(this, OTPActivity::class.java)
@@ -95,15 +96,14 @@ class LoginActivity : AppCompatActivity() {
                                         customAlertDialog.show()
                                     }
                                     customAlertDialog.setOnDismissListener {
-                                        if(!isFinishing)
-                                        (window.decorView as ViewGroup).removeView(overlayLayout)
+                                        if(!isFinishing)(window.decorView as ViewGroup).removeView(overlayLayout)
                                     }
                                 } else {
                                     viewModel.saveVerified()
                                     val inflater = LayoutInflater.from(this)
                                     val builder = AlertDialog.Builder(this)
                                     val customAlertDialogView = inflater.inflate(R.layout.layout_login, null)
-                                    val customVerifyButton = customAlertDialogView.findViewById<MaterialButton>(R.id.btn_verify)
+                                    val customVerifyButton = customAlertDialogView.findViewById<MaterialButton>(R.id.btn_verify_login)
                                     val customDesc = customAlertDialogView.findViewById<TextView>(R.id.login_desc)
                                     val customContinueButton = customAlertDialogView.findViewById<MaterialButton>(R.id.btn_continue)
                                     customDesc.text = "Login Successfull! Press Continue \nto go into the app"

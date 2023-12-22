@@ -1,28 +1,19 @@
 package com.dicoding.carvalappandroid.ui.home
 
-import android.health.connect.datatypes.units.Length
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.carvalappandroid.R
-import com.dicoding.carvalappandroid.databinding.FragmentArticleBinding
 import com.dicoding.carvalappandroid.databinding.FragmentHomeBinding
-import com.dicoding.carvalappandroid.response.HomeDataItem
-import com.dicoding.carvalappandroid.setting.SettingsActivity
-import com.dicoding.carvalappandroid.ui.article.ArticleAdapter
-import com.dicoding.carvalappandroid.ui.form.FormFragment
 import com.dicoding.carvalappandroid.utils.Result
-import com.dicoding.carvalappandroid.utils.ViewModelFactory
 import com.dicoding.carvalappandroid.utils.ViewModelFactoryHome
 
 class HomeFragment : Fragment() {

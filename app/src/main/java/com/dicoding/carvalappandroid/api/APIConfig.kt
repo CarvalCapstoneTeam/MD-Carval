@@ -1,6 +1,6 @@
 package com.dicoding.carvalappandroid.api
 
-import com.google.gson.GsonBuilder
+import com.dicoding.carvalappandroid.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -17,15 +17,14 @@ class APIConfig {
                     .build()
                 chain.proceed(requestHeaders)
             }
-//            val gson = GsonBuilder().setLenient().create()
             val client = OkHttpClient.Builder()
                 .addInterceptor(authInterceptor)
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(75, TimeUnit.SECONDS)
+                .readTimeout(75, TimeUnit.SECONDS)
+                .writeTimeout(75, TimeUnit.SECONDS)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://carval.cloud/api/")
+                .baseUrl(BuildConfig.base_url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

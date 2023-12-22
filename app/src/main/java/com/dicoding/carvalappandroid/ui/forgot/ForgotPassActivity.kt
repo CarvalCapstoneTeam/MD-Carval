@@ -1,17 +1,14 @@
 package com.dicoding.carvalappandroid.ui.forgot
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.dicoding.carvalappandroid.R
+import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.carvalappandroid.databinding.ActivityForgotPassBinding
-import com.dicoding.carvalappandroid.databinding.ActivityLoginBinding
 import com.dicoding.carvalappandroid.ui.otp.OTPResetActivity
-import com.dicoding.carvalappandroid.ui.reset.PassResetActivity
 import com.dicoding.carvalappandroid.utils.Result
 import com.dicoding.carvalappandroid.utils.ViewModelFactory
 

@@ -4,16 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
 import com.dicoding.carvalappandroid.data.HomeRepository
-import com.dicoding.carvalappandroid.data.JobRepository
-import com.dicoding.carvalappandroid.response.DataItem
 import com.dicoding.carvalappandroid.response.HomeDataItem
 import com.dicoding.carvalappandroid.utils.Result
 import com.dicoding.carvalappandroid.utils.UserModel
-import kotlinx.coroutines.launch
 
 class HomeViewModel (private val repository: HomeRepository) : ViewModel() {
 
@@ -32,9 +26,4 @@ class HomeViewModel (private val repository: HomeRepository) : ViewModel() {
         return repository.getArticle()
     }
 
-//    fun getData(): LiveData<List<HomeDataItem>>{
-//        return repository.getData()
-//    }
-
-    fun getData() = repository.getData()
 }

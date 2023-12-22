@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:layout_marginTop="24dp"
-        android:text="Verification"
+        android:text="@string/verification"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Kindly check your email"
+        android:text="@string/check_email"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:textStyle="bold"
-        android:text="Verification Code"
+        android:text="@string/title_code"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:gravity="center"
-        android:text="Masukkan 4 digit kode OTP telah dikirimkan ke \nemail eren@mail.com."
+        android:text="@string/description_OTP"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="24dp"/>
@@ -134,7 +134,7 @@
         app:cornerRadius="12dp"
         android:backgroundTint="#202A44"
         android:enabled="true"
-        android:text="Verify"
+        android:text="@string/verify"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -149,8 +149,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="30dp"
-        android:text="Didn't receive an OTP?"
-        android:textSize="12dp"
+        android:text="@string/didn_t_receive_an_otp"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/verify_Button"
         android:gravity="center"/>
@@ -159,9 +159,9 @@
         android:id="@+id/resend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="2dp"
-        android:text="Resend Code"
-        android:textSize="12dp"
+        android:layout_marginStart="2dp"
+        android:text="@string/resend_code"
+        android:textSize="12sp"
         android:textColor="@color/teal_700"
         android:layout_marginTop="4dp"
         android:textStyle="bold"

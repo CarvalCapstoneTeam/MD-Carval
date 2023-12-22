@@ -3,7 +3,6 @@ package com.dicoding.carvalappandroid.utils
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.dicoding.carvalappandroid.MainViewModel
 import com.dicoding.carvalappandroid.data.HomeRepository
 import com.dicoding.carvalappandroid.ui.home.HomeViewModel
 

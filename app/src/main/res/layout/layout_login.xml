@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/login_success"
-        android:text="Login Successfull"
+        android:text="@string/layout_login_title"
         android:textColor="#5E8B7E"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/login_text"
         android:gravity="center"
-        android:text="Looks like you haven't \nverified your account yet,\nwould you like to verify your account?"
+        android:text="@string/layout_login_desc"
         android:textColor="#5E8B7E"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +48,7 @@
         android:textStyle="bold"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_verify"
+        android:id="@+id/btn_verify_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#5E8B7E"
@@ -57,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp"
         app:layout_constraintTop_toBottomOf="@id/login_desc"
-        android:text="Yes, Verify my account"
+        android:text="@string/yes_verify"
         />
 
     <com.google.android.material.button.MaterialButton
@@ -70,8 +70,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:textColor="@color/black"
         android:layout_marginTop="12dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_verify"
-        android:text="Maybe Later"
+        app:layout_constraintTop_toBottomOf="@id/btn_verify_login"
+        android:text="@string/btn_continue_info"
         />
 
     <ProgressBar

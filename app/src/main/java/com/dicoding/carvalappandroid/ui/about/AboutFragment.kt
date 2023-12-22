@@ -17,20 +17,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import com.dicoding.carvalappandroid.MainActivity
 import com.dicoding.carvalappandroid.R
 import com.dicoding.carvalappandroid.databinding.FragmentAboutBinding
-import com.dicoding.carvalappandroid.databinding.FragmentArticleBinding
-import com.dicoding.carvalappandroid.setting.SettingsActivity
-import com.dicoding.carvalappandroid.ui.login.LoginActivity
 import com.dicoding.carvalappandroid.ui.onboarding.BoardingActivity
-import com.dicoding.carvalappandroid.ui.otp.OTPActivity
 import com.dicoding.carvalappandroid.ui.tos.TermsOfServiceActivity
 import com.dicoding.carvalappandroid.utils.Result
-import com.dicoding.carvalappandroid.utils.UserModel
 import com.dicoding.carvalappandroid.utils.ViewModelFactory
-import com.google.android.material.button.MaterialButton
 
 class AboutFragment : Fragment() {
 
@@ -40,8 +32,6 @@ class AboutFragment : Fragment() {
         ViewModelFactory.getInstance(requireActivity(), false)
     }
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     @SuppressLint("RestrictedApi")
@@ -85,36 +75,48 @@ class AboutFragment : Fragment() {
             }
 
             btnSubmit.setOnClickListener {
-                viewModel.updateProfile(etData1.text.toString(), etData2.text.toString())
-                    .observe(viewLifecycleOwner) { result ->
-                        when (result) {
-                            is Result.Success -> {
-                                progressBar.visibility = View.GONE
-                                Log.d("Log", "Message : ${result.data.message}")
-                                Toast.makeText(
-                                    requireContext(),
-                                    "Changes has been made successfully",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                viewModel.saveDataUser(
-                                    etData1.text.toString(),
-                                    etData2.text.toString()
-                                )
-                                customAlertDialog.dismiss()
-                            }
+                if (etData1.text.isEmpty()) {
+                    etData1.error = "This Field cannot be empty"
+                    etData1.requestFocus()
+                } else if (etData2.text.isEmpty()) {
+                    etData2.error = "This Field cannot be empty"
+                    etData2.requestFocus()
+                } else {
+                    viewModel.updateProfile(etData1.text.toString(), etData2.text.toString())
+                        .observe(viewLifecycleOwner) { result ->
+                            when (result) {
+                                is Result.Success -> {
+                                    progressBar.visibility = View.GONE
+                                    Log.d("Log", "Message : ${result.data.message}")
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Changes has been made successfully",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    viewModel.saveDataUser(
+                                        etData1.text.toString(),
+                                        etData2.text.toString()
+                                    )
+                                    customAlertDialog.dismiss()
+                                }
 
-                            is Result.Error -> {
-                                progressBar.visibility = View.GONE
-                                Log.d("Log", "Message : ${result.error}")
-                                Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT)
-                                    .show()
-                            }
+                                is Result.Error -> {
+                                    progressBar.visibility = View.GONE
+                                    Log.d("Log", "Message : ${result.error}")
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "The email field must be a valid email address",
+                                        Toast.LENGTH_SHORT
+                                    )
+                                        .show()
+                                }
 
-                            is Result.Loading -> {
-                                progressBar.visibility = View.VISIBLE
+                                is Result.Loading -> {
+                                    progressBar.visibility = View.VISIBLE
+                                }
                             }
                         }
-                    }
+                }
             }
 
             builder.setView(customAlertDialogView)
@@ -166,33 +168,68 @@ class AboutFragment : Fragment() {
 
             })
 
+            etData3.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    //none
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    //none
+                }
+
+                override fun afterTextChanged(p0: Editable?) {
+                    val password = p0.toString()
+
+                    if (p0 != null) {
+                        if (!password.any { it.isDigit() }) {
+                            etData3.error = "Password must contain at least 1 number"
+                        } else if (!password.any { it.isUpperCase() }) {
+                            etData3.error =
+                                "Password must contain at least 1 uppercase letter"
+                        }
+                    }
+                }
+
+            })
+
             btnSubmit.setOnClickListener {
-                viewModel.changePassword(
-                    etData1.text.toString(),
-                    etData2.text.toString(),
-                    etData3.text.toString()
-                ).observe(viewLifecycleOwner) { result ->
-                    when (result) {
-                        is Result.Success -> {
-                            progressBar.visibility = View.GONE
-                            Log.d("Log", "Message : ${result.data.message}")
-                            Toast.makeText(
-                                requireContext(),
-                                "Changes has been made successfully",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            customAlertDialog.dismiss()
-                        }
+                if (etData1.text.isEmpty()) {
+                    etData1.error = "This Field cannot be empty"
+                    etData1.requestFocus()
+                } else if (etData2.text.isEmpty()) {
+                    etData2.error = "This Field cannot be empty"
+                    etData2.requestFocus()
+                } else if (etData3.text.isEmpty()) {
+                    etData3.error = "This Field cannot be empty"
+                    etData3.requestFocus()
+                } else {
+                    viewModel.changePassword(
+                        etData1.text.toString(),
+                        etData2.text.toString(),
+                        etData3.text.toString()
+                    ).observe(viewLifecycleOwner) { result ->
+                        when (result) {
+                            is Result.Success -> {
+                                progressBar.visibility = View.GONE
+                                Log.d("Log", "Message : ${result.data.message}")
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Changes has been made successfully",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                customAlertDialog.dismiss()
+                            }
 
-                        is Result.Error -> {
-                            progressBar.visibility = View.GONE
-                            Log.d("Log", "Message : ${result.error}")
-                            Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT)
-                                .show()
-                        }
+                            is Result.Error -> {
+                                progressBar.visibility = View.GONE
+                                Log.d("Log", "Message : ${result.error}")
+                                Toast.makeText(requireContext(), "The new password field confirmation does not match", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
 
-                        is Result.Loading -> {
-                            progressBar.visibility = View.VISIBLE
+                            is Result.Loading -> {
+                                progressBar.visibility = View.VISIBLE
+                            }
                         }
                     }
                 }

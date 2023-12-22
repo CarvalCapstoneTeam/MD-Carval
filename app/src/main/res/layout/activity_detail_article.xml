@@ -22,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:src="@drawable/arrow_back"
             android:background="@android:color/transparent"
-            android:contentDescription="back_button" />
+            android:contentDescription="@string/back_button" />
 
         <TextView
             android:id="@+id/tv_TitleDetail"
@@ -35,7 +35,7 @@
             android:textSize="24sp"
             android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@id/iv_Thumbnail"
-            android:text="News_Title"
+            android:text="@string/news_title"
             />
 
         <ImageView
@@ -57,7 +57,7 @@
             android:textSize="12sp"
             android:paddingStart="12dp"
             android:layout_marginTop="12dp"
-            android:text="Penulis"
+            android:text="@string/penulis"
             android:layout_marginEnd="80dp"/>
 
         <TextView
@@ -69,7 +69,7 @@
             android:layout_marginTop="12dp"
             android:textSize="12sp"
             android:layout_marginStart="12dp"
-            android:text="NewsOutlet"
+            android:text="@string/newsoutlet"
             android:textColor="#407BFF"
             android:layout_marginEnd="40dp"/>
 
@@ -82,7 +82,7 @@
             android:layout_marginTop="12dp"
             android:textSize="12sp"
             android:layout_marginStart="12dp"
-            android:text="Tanggal"
+            android:text="@string/tanggal"
             android:layout_marginEnd="40dp"/>
 
         <TextView
@@ -95,8 +95,8 @@
             android:textSize="14sp"
             android:layout_marginTop="12dp"
             android:paddingStart="12dp"
-            android:gravity="left"
-            android:text="NewsDetail" />
+            android:gravity="start"
+            android:text="@string/newsdetail" />
 
         <ProgressBar
             android:id="@+id/progressBar"

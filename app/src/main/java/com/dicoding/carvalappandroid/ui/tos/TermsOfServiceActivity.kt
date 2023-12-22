@@ -1,9 +1,7 @@
 package com.dicoding.carvalappandroid.ui.tos
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.dicoding.carvalappandroid.R
-import com.dicoding.carvalappandroid.databinding.ActivityLoginBinding
+import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.carvalappandroid.databinding.ActivityTermsOfServiceBinding
 
 class TermsOfServiceActivity : AppCompatActivity() {

@@ -4,13 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.dicoding.carvalappandroid.data.JobRepository
-import com.dicoding.carvalappandroid.response.UpdateProfileResponse
-import com.dicoding.carvalappandroid.utils.Result
 import com.dicoding.carvalappandroid.utils.UserModel
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class AboutViewModel(private val repository: JobRepository) : ViewModel() {

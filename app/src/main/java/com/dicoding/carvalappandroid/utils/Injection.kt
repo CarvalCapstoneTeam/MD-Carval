@@ -26,7 +26,7 @@ object Injection {
         val apiService = provideAPIService(context)
         val database = HomeDatabase.getHomeDatabase(context)
         val dao = database.homeDao()
-        return HomeRepository(database, apiService, pref, dao)
+        return HomeRepository(apiService, pref, dao)
     }
 
     private fun provideAPIService(context: Context): APIService {

@@ -1,7 +1,6 @@
 package com.dicoding.carvalappandroid.ui.otp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,12 +8,9 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.dicoding.carvalappandroid.MainActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.carvalappandroid.R
-import com.dicoding.carvalappandroid.databinding.ActivityForgotPassBinding
-import com.dicoding.carvalappandroid.databinding.ActivityLoginBinding
 import com.dicoding.carvalappandroid.databinding.ActivityOtpresetBinding
-import com.dicoding.carvalappandroid.ui.forgot.ForgotPassViewModel
 import com.dicoding.carvalappandroid.ui.reset.PassResetActivity
 import com.dicoding.carvalappandroid.utils.Result
 import com.dicoding.carvalappandroid.utils.ViewModelFactory
@@ -30,7 +26,7 @@ class OTPResetActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val email = intent.getStringExtra("emailReset")
-        binding.tvDesc.text = "Masukkan 4 digit kode OTP telah dikirimkan ke \n" + email
+        binding.tvDesc.text = getString(R.string.description_OTP, email)
 
         viewModel.isLoading.observe(this){
             showLoading(it)

@@ -4,14 +4,12 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.carvalappandroid.MainViewModel
-import com.dicoding.carvalappandroid.data.HomeRepository
 import com.dicoding.carvalappandroid.data.JobRepository
 import com.dicoding.carvalappandroid.ui.about.AboutViewModel
 import com.dicoding.carvalappandroid.ui.article.ArticleViewModel
 import com.dicoding.carvalappandroid.ui.detail.DetailViewModel
 import com.dicoding.carvalappandroid.ui.forgot.ForgotPassViewModel
 import com.dicoding.carvalappandroid.ui.form.FormViewModel
-import com.dicoding.carvalappandroid.ui.home.HomeViewModel
 import com.dicoding.carvalappandroid.ui.login.LoginViewModel
 import com.dicoding.carvalappandroid.ui.onboarding.BoardingViewModel
 import com.dicoding.carvalappandroid.ui.otp.OTPResetViewModel

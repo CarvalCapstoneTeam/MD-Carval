@@ -37,7 +37,7 @@
         android:layout_marginTop="6dp"
         android:textStyle="bold"
         android:textSize="24sp"
-        android:text="Welcome"
+        android:text="@string/welcome"
         android:textColor="@color/black"
         android:gravity="center"/>
     <TextView
@@ -47,14 +47,14 @@
         app:layout_constraintTop_toBottomOf="@id/tv_headerLogin"
         android:layout_marginTop="8dp"
         android:textSize="14sp"
-        android:text="Login with your Account to \n receive full access of this app "
+        android:text="@string/desc_login"
         android:gravity="center"/>
 
-    <EditText
-        android:id="@+id/email"
+    <com.dicoding.carvalappandroid.ui.editText.EmailEditText
+        android:id="@+id/email_login"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:hint="Insert Email"
+        android:hint="@string/insert_email"
         android:textSize="17sp"
         android:layout_marginTop="84dp"
         android:inputType="textEmailAddress"
@@ -70,19 +70,19 @@
 
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/password_login"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:textSize="17sp"
-        android:hint="Insert Password"
+        android:hint="@string/insert_password"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email"
+        app:layout_constraintTop_toBottomOf="@id/email_login"
         android:background="@drawable/border_radius"
         android:paddingStart="17dp"
         android:paddingEnd="17dp"/>
@@ -96,10 +96,10 @@
         app:cornerRadius="12dp"
         android:backgroundTint="#202A44"
         android:enabled="true"
-        android:text="Login"
+        android:text="@string/login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toBottomOf="@+id/password_login" />
 
     <TextView
         android:id="@+id/et_Reminder"
@@ -108,9 +108,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp"
-        android:layout_marginRight="48dp"
-        android:text="Didn't own an account yet?"
-        android:textSize="12dp"
+        android:layout_marginEnd="48dp"
+        android:text="@string/reminder_login"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/login_Button"
         android:gravity="center"/>
@@ -120,9 +120,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/et_Reminder"
-        android:layout_marginLeft="2dp"
-        android:text="Register"
-        android:textSize="12dp"
+        android:layout_marginStart="2dp"
+        android:text="@string/register"
+        android:textSize="12sp"
         android:textColor="#005BAC"
         android:layout_marginTop="24dp"
         android:textStyle="bold"
@@ -133,27 +133,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginLeft="2dp"
-        android:text="Forgot Password?"
+        android:layout_marginStart="2dp"
+        android:text="@string/forgot_password"
         android:textSize="13sp"
         android:textColor="#005BAC"
         android:layout_marginTop="12dp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/password"/>
-
-    <ProgressBar
-        android:id="@+id/loading"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="64dp"
-        android:layout_marginBottom="64dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/password"
-        app:layout_constraintStart_toStartOf="@+id/password"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintTop_toBottomOf="@id/password_login"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

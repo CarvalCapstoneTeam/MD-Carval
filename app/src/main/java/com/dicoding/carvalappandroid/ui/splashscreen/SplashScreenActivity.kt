@@ -2,13 +2,11 @@ package com.dicoding.carvalappandroid.ui.splashscreen
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.carvalappandroid.MainActivity
-import com.dicoding.carvalappandroid.R
-import com.dicoding.carvalappandroid.databinding.ActivityBoardingBinding
 import com.dicoding.carvalappandroid.databinding.ActivitySplashScreenBinding
 import com.dicoding.carvalappandroid.ui.onboarding.BoardingActivity
 import com.dicoding.carvalappandroid.utils.ViewModelFactory
