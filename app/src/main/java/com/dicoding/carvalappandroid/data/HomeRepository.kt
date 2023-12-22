@@ -12,7 +12,7 @@ import com.dicoding.carvalappandroid.utils.UserModel
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
-class HomeRepository constructor(
+class HomeRepository(
     private val homeDatabase: HomeDatabase,
     private val apiService: APIService,
     private val tokenPref: TokenPreference,

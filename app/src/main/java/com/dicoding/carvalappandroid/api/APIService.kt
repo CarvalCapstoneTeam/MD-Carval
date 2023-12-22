@@ -12,7 +12,6 @@ import com.dicoding.carvalappandroid.response.ModelResponse
 import com.dicoding.carvalappandroid.response.OTPForgotResponse
 import com.dicoding.carvalappandroid.response.OTPResponse
 import com.dicoding.carvalappandroid.response.RegisterResponse
-import com.dicoding.carvalappandroid.response.ResultResponse
 import com.dicoding.carvalappandroid.response.UpdateProfileResponse
 import com.dicoding.carvalappandroid.response.VerifiedResponse
 import retrofit2.http.Field
@@ -125,6 +124,4 @@ interface APIService {
     @GET("articles/{slug}/show")
     suspend fun getDetailArticle(@Path("slug") slug: String): DetailResponse
 
-    @GET("result/{num}")
-    suspend fun getResultById(@Path("num") num: Int): ResultResponse
 }

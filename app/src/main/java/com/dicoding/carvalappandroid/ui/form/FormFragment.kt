@@ -91,77 +91,119 @@ class FormFragment : Fragment() {
             val benefit = binding.etBenefits.text.toString()
             var telecommuting = 0
 
-            viewModel.sendResult(jobName, location, department, salary, profile, description, requirement, benefit,telecommuting).observe(viewLifecycleOwner){result->
-                when(result){
-                    is Result.Loading ->{
-                        Log.d("Loading1", "$jobName, $location, $department" )
-                        Log.d("Loading2", "$salary, $profile, $requirement" )
-                        binding.yesNoRadioGroup.setOnCheckedChangeListener{group, checkedId->
-                            when(checkedId){
-                                R.id.yesRadioButton -> {
-                                    telecommuting = 1
-                                }
-                                R.id.noRadioButton -> {
-                                    telecommuting = 0
+            if(jobName.isEmpty()){
+                binding.etName.error = "This field must not be empty"
+            }else if(location.isEmpty()){
+                binding.etLocation.error = "This field must not be empty"
+            }else if(salary.isEmpty()){
+                binding.etSalary.error = "This field must not be empty"
+            }else if(profile.isEmpty()){
+                binding.etProfile.error = "This field must not be empty"
+            }else {
+                viewModel.sendResult(
+                    jobName,
+                    location,
+                    department,
+                    salary,
+                    profile,
+                    description,
+                    requirement,
+                    benefit,
+                    telecommuting
+                ).observe(viewLifecycleOwner) { result ->
+                    when (result) {
+                        is Result.Loading -> {
+                            Log.d("Loading1", "$jobName, $location, $department")
+                            Log.d("Loading2", "$salary, $profile, $requirement")
+                            binding.yesNoRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+                                when (checkedId) {
+                                    R.id.yesRadioButton -> {
+                                        telecommuting = 1
+                                    }
+
+                                    R.id.noRadioButton -> {
+                                        telecommuting = 0
+                                    }
                                 }
                             }
-                        }
-                        Log.d("Loading", "$benefit, $telecommuting" )
-                        showLoading(true)
-                    }
-
-                    is Result.Success -> {
-                        showLoading(false)
-                        val builder = AlertDialog.Builder(requireContext())
-                        val customAlertDialogView = View.inflate(requireContext(), R.layout.layout_result, null)
-                        val logo = customAlertDialogView.findViewById<ImageView>(R.id.data_real)
-                        val resultTitle = customAlertDialogView.findViewById<TextView>(R.id.result_text)
-                        val accuracy = customAlertDialogView.findViewById<TextView>(R.id.result_accuracy)
-                        val tryAgain = customAlertDialogView.findViewById<MaterialButton>(R.id.btn_try)
-                        val home = customAlertDialogView.findViewById<TextView>(R.id.btn_home)
-
-                        if (result.data.predictionResult?.prediction == "Real"){
-                            accuracy.text = "Real Probability = " + result.data.predictionResult.realProbability.toString()
-                            Log.d("Log", "Message : " + result.data.predictionResult.fakeProbability.toString())
-                        }else{
-                            logo.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.result_fake))
-                            resultTitle.text = "Fake"
-                            resultTitle.setTextColor(Color.RED)
-                            accuracy.text = "Fake Probability = " + result.data.predictionResult?.fakeProbability.toString()
-                            Log.d("Log", "Message : " + result.data.predictionResult?.realProbability.toString())
-                            accuracy.setTextColor(Color.RED)
+                            Log.d("Loading", "$benefit, $telecommuting")
+                            showLoading(true)
                         }
 
-                        tryAgain.setOnClickListener{
-                            customAlertDialog.dismiss()
-                            binding.etName.text = null
-                            binding.etLocation.text = null
-                            binding.etDepartment.text = null
-                            binding.etSalary.text = null
-                            binding.etProfile.text = null
-                            binding.etDescription.text = null
-                            binding.etRequirement.text = null
-                            binding.etBenefits.text = null
-                            binding.yesNoRadioGroup.clearCheck()
+                        is Result.Success -> {
+                            showLoading(false)
+                            val builder = AlertDialog.Builder(requireContext())
+                            val customAlertDialogView =
+                                View.inflate(requireContext(), R.layout.layout_result, null)
+                            val logo = customAlertDialogView.findViewById<ImageView>(R.id.data_real)
+                            val resultTitle =
+                                customAlertDialogView.findViewById<TextView>(R.id.result_text)
+                            val accuracy =
+                                customAlertDialogView.findViewById<TextView>(R.id.result_accuracy)
+                            val tryAgain =
+                                customAlertDialogView.findViewById<MaterialButton>(R.id.btn_try)
+                            val home = customAlertDialogView.findViewById<TextView>(R.id.btn_home)
+
+                            if (result.data.predictionResult?.prediction == "Real") {
+                                accuracy.text =
+                                    "Real Probability = " + result.data.predictionResult.realProbability.toString()
+                                Log.d(
+                                    "Log",
+                                    "Message : " + result.data.predictionResult.fakeProbability.toString()
+                                )
+                            } else {
+                                logo.setImageDrawable(
+                                    ContextCompat.getDrawable(
+                                        requireContext(),
+                                        R.drawable.result_fake
+                                    )
+                                )
+                                resultTitle.text = "Fake"
+                                resultTitle.setTextColor(Color.RED)
+                                accuracy.text =
+                                    "Fake Probability = " + result.data.predictionResult?.fakeProbability.toString()
+                                Log.d(
+                                    "Log",
+                                    "Message : " + result.data.predictionResult?.realProbability.toString()
+                                )
+                                accuracy.setTextColor(Color.RED)
+                            }
+
+                            tryAgain.setOnClickListener {
+                                customAlertDialog.dismiss()
+                                binding.etName.text = null
+                                binding.etLocation.text = null
+                                binding.etDepartment.text = null
+                                binding.etSalary.text = null
+                                binding.etProfile.text = null
+                                binding.etDescription.text = null
+                                binding.etRequirement.text = null
+                                binding.etBenefits.text = null
+                                binding.yesNoRadioGroup.clearCheck()
+                            }
+
+                            home.setOnClickListener {
+                                findNavController().navigate(R.id.action_secondFragment_to_firstFragment)
+                                customAlertDialog.dismiss()
+                            }
+
+
+                            builder.setView(customAlertDialogView)
+                            customAlertDialog = builder.create()
+                            customAlertDialog.show()
+
+                            Log.d("Loading", "Message : ${result.data.message}")
                         }
 
-                        home.setOnClickListener {
-                            findNavController().navigate(R.id.action_secondFragment_to_firstFragment)
-                            customAlertDialog.dismiss()
+                        is Result.Error -> {
+                            showLoading(false)
+                            Toast.makeText(
+                                requireContext(),
+                                "Timeout/Your account is not verified yet",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            Log.d("ErrorArticle", "Error : ${result.error}")
                         }
-
-
-                        builder.setView(customAlertDialogView)
-                        customAlertDialog = builder.create()
-                        customAlertDialog.show()
-
-                        Log.d("Loading", "Message : ${result.data.message}" )
-                    }
-
-                    is  Result.Error -> {
-                        showLoading(false)
-                        Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
-                        Log.d("ErrorArticle", "Error : ${result.error}")
                     }
                 }
             }

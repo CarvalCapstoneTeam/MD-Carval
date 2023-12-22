@@ -4,9 +4,12 @@ import android.content.Intent
 import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.widget.addTextChangedListener
 import com.dicoding.carvalappandroid.R
 import com.dicoding.carvalappandroid.databinding.ActivityBoardingBinding
 import com.dicoding.carvalappandroid.databinding.ActivityLoginBinding
@@ -35,12 +38,34 @@ class RegisterActivity : AppCompatActivity() {
             showLoading(it)
         }
 
+        binding.password.addTextChangedListener (object: TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //none
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //none
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                val password = p0.toString()
+
+                if (p0 != null) {
+                    if (!password.any { it.isDigit()}){
+                        binding.password.error = "Password must contain at least 1 number"
+                    }else if (!password.any{it.isUpperCase()}){
+                        binding.password.error = "Password must contain at least 1 uppercase letter"
+                    }
+                }
+            }
+
+        })
+
         binding.registerButton.setOnClickListener{
             val name = binding.name.text.toString()
             val email = binding.etEmail.text.toString()
             val password = binding.password.text.toString()
             val password2 = binding.confirmPassword.text.toString()
-
             when{
                 email.isEmpty() -> binding.etEmail.error = "Email cannot be empty"
                 name.isEmpty() -> binding.name.error = "Name cannot be empty"

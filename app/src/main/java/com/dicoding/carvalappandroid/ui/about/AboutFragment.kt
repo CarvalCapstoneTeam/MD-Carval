@@ -3,7 +3,9 @@ package com.dicoding.carvalappandroid.ui.about
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.text.InputType
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -53,14 +55,15 @@ class AboutFragment : Fragment() {
 
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
-        viewModel.getSession().observe(requireActivity()){session->
+        viewModel.getSession().observe(requireActivity()) { session ->
             binding.tvName.setText(session.username)
             binding.tvEmail.setText(session.email)
         }
 
-        binding.btnEdit.setOnClickListener{
+        binding.btnEdit.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
-            val customAlertDialogView = View.inflate(requireContext(), R.layout.layout_profile_change, null)
+            val customAlertDialogView =
+                View.inflate(requireContext(), R.layout.layout_profile_change, null)
             val tvData1 = customAlertDialogView.findViewById<TextView>(R.id.tv_data1)
             val etData1 = customAlertDialogView.findViewById<TextView>(R.id.et_data1)
             val tvData2 = customAlertDialogView.findViewById<TextView>(R.id.tv_data2)
@@ -76,34 +79,44 @@ class AboutFragment : Fragment() {
             tvData1.text = "Nama"
             tvData2.text = "Email"
 
-            viewModel.getSession().observe(requireActivity()){session->
+            viewModel.getSession().observe(requireActivity()) { session ->
                 etData1.setText(session.username)
                 etData2.setText(session.email)
             }
-            
+
             btnSubmit.setOnClickListener {
-                viewModel.updateProfile(etData1.text.toString(), etData2.text.toString()).observe(viewLifecycleOwner){result->
-                    when(result){
-                        is Result.Success->{
-                            progressBar.visibility = View.GONE
-                            Log.d("Log", "Message : ${result.data.message}")
-                            viewModel.saveDataUser(etData1.text.toString(), etData2.text.toString())
-                            customAlertDialog.dismiss()
-                        }
+                viewModel.updateProfile(etData1.text.toString(), etData2.text.toString())
+                    .observe(viewLifecycleOwner) { result ->
+                        when (result) {
+                            is Result.Success -> {
+                                progressBar.visibility = View.GONE
+                                Log.d("Log", "Message : ${result.data.message}")
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Changes has been made successfully",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                viewModel.saveDataUser(
+                                    etData1.text.toString(),
+                                    etData2.text.toString()
+                                )
+                                customAlertDialog.dismiss()
+                            }
 
-                        is Result.Error -> {
-                            progressBar.visibility = View.GONE
-                            Log.d("Log", "Message : ${result.error}")
-                            Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
-                        }
+                            is Result.Error -> {
+                                progressBar.visibility = View.GONE
+                                Log.d("Log", "Message : ${result.error}")
+                                Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT)
+                                    .show()
+                            }
 
-                        is Result.Loading -> {
-                            progressBar.visibility = View.VISIBLE
+                            is Result.Loading -> {
+                                progressBar.visibility = View.VISIBLE
+                            }
                         }
                     }
-                }
             }
-            
+
             builder.setView(customAlertDialogView)
             customAlertDialog = builder.create()
             customAlertDialog.show()
@@ -111,7 +124,8 @@ class AboutFragment : Fragment() {
 
         binding.btnChange.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
-            val customAlertDialogView = View.inflate(requireContext(), R.layout.layout_profile_change, null)
+            val customAlertDialogView =
+                View.inflate(requireContext(), R.layout.layout_profile_change, null)
             val tvData1 = customAlertDialogView.findViewById<TextView>(R.id.tv_data1)
             val etData1 = customAlertDialogView.findViewById<TextView>(R.id.et_data1)
             val tvData2 = customAlertDialogView.findViewById<TextView>(R.id.tv_data2)
@@ -128,19 +142,53 @@ class AboutFragment : Fragment() {
             tvData3.text = "New Password Confirmation"
             tvData3.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
 
+            etData2.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    //none
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    //none
+                }
+
+                override fun afterTextChanged(p0: Editable?) {
+                    val password = p0.toString()
+
+                    if (p0 != null) {
+                        if (!password.any { it.isDigit() }) {
+                            etData2.error = "Password must contain at least 1 number"
+                        } else if (!password.any { it.isUpperCase() }) {
+                            etData2.error =
+                                "Password must contain at least 1 uppercase letter"
+                        }
+                    }
+                }
+
+            })
+
             btnSubmit.setOnClickListener {
-                viewModel.changePassword(etData1.text.toString(), etData2.text.toString(), etData3.text.toString()).observe(viewLifecycleOwner){result->
-                    when(result){
-                        is Result.Success->{
+                viewModel.changePassword(
+                    etData1.text.toString(),
+                    etData2.text.toString(),
+                    etData3.text.toString()
+                ).observe(viewLifecycleOwner) { result ->
+                    when (result) {
+                        is Result.Success -> {
                             progressBar.visibility = View.GONE
                             Log.d("Log", "Message : ${result.data.message}")
+                            Toast.makeText(
+                                requireContext(),
+                                "Changes has been made successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
                             customAlertDialog.dismiss()
                         }
 
                         is Result.Error -> {
                             progressBar.visibility = View.GONE
                             Log.d("Log", "Message : ${result.error}")
-                            Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT)
+                                .show()
                         }
 
                         is Result.Loading -> {
@@ -154,12 +202,12 @@ class AboutFragment : Fragment() {
             customAlertDialog.show()
         }
 
-        binding.btnTos.setOnClickListener{
+        binding.btnTos.setOnClickListener {
             val intentTos = Intent(requireActivity(), TermsOfServiceActivity::class.java)
             startActivity(intentTos)
         }
 
-        binding.btnLogout.setOnClickListener{
+        binding.btnLogout.setOnClickListener {
             val intent = Intent(requireActivity(), BoardingActivity::class.java)
             startActivity(intent)
             viewModel.logout()

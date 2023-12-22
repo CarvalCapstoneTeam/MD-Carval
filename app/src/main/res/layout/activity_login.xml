@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:src="@drawable/workerslogin2"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -56,7 +56,7 @@
         android:layout_height="48dp"
         android:hint="Insert Email"
         android:textSize="17sp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="84dp"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,16 +92,14 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="start"
-        android:layout_marginTop="48dp"
-        android:layout_marginBottom="140dp"
+        android:layout_marginTop="60dp"
         app:cornerRadius="12dp"
         android:backgroundTint="#202A44"
         android:enabled="true"
         android:text="Login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.441" />
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <TextView
         android:id="@+id/et_Reminder"

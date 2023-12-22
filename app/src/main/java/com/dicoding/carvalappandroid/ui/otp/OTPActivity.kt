@@ -39,7 +39,6 @@ class OTPActivity : AppCompatActivity() {
         binding.tvDesc.text = "Masukkan 4 digit kode OTP telah dikirimkan ke \n" + email
 
         if (email != null) {
-            Toast.makeText(this, email, Toast.LENGTH_SHORT).show()
             viewModel.verification(email).observe(this) { result ->
                 when (result) {
                     is Result.Loading -> {

@@ -31,7 +31,7 @@ import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
 
-class JobRepository constructor(
+class JobRepository(
     private val jobDatabase: JobDatabase,
     private val apiService: APIService,
     private val tokenPref: TokenPreference,
@@ -170,16 +170,6 @@ class JobRepository constructor(
         ).liveData
     }
 
-
-//    fun getArticle() : LiveData<Result<List<DataItem>>> = liveData {
-//        emit(Result.Loading)
-//        try {
-//            val response = apiService.getArticles()
-//            emit(Result.Success(response.listArticle.data))
-//        }catch (e:Exception){
-//            emit(Result.Error(e.message.toString()))
-//        }
-//    }
 
     fun getDetailArticle(id: String): LiveData<Result<DetailResponse>> = liveData {
         emit(Result.Loading)
